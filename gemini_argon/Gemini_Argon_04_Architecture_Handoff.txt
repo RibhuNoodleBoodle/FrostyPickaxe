@@ -1,0 +1,74 @@
+====================================================================
+GEMINI ARGON — SESSION 4: MASTER ARCHITECTURE HANDOFF ENTRY PROMPT
+PROJECT: FrostyPickaxe (Rise of the Tomb Raider [Xbox 360, Title ID 53510823] -> Native PC x86-64, Android ARM64 Deferred)
+====================================================================
+
+1. MANDATORY FIRST ACTION: READ PHASE 0 ARTIFACTS BEFORE RESPONDING
+--------------------------------------------------------------------
+You are starting Phase 1 as the PRINCIPAL SOFTWARE ARCHITECT for `FrostyPickaxe`.
+Before generating any architectural analysis or design records, you MUST read the following Phase 0 files in full, in this exact order:
+
+1. `gemini_argon/Gemini_Argon_01_Personality.txt` (Your identity, temperament, and strict no-coding rule for this initial architecture session)
+2. `gemini_argon/Gemini_Argon_02_Scope.txt` (Target priority order, title-specific requirements, and exclusions)
+3. `gemini_argon/Gemini_Argon_03_Skills.txt` (Required analytical domains, checks, and escalation criteria)
+4. `README.md` (Current honest project state)
+5. `docs/research/00_Repository_State.md` (Workspace inventory, pinned ReXGlue SDK revisions, and legal/provenance rules)
+6. `docs/research/01_Feasibility_Report.md` (Falsifiable feasibility verdicts, subsystem audits, Intel HD 620 analysis, and deferred Android constraints)
+7. `docs/research/02_Risks_Unknowns_and_Gates.md` (Ranked blockers `BLK-01`..`BLK-09`, falsifiable experiments `EXP-01`..`EXP-06`, and Decision Gates `G0`..`G5`)
+8. `docs/research/03_Sources_and_Evidence.md` (Source register, revision pins, and conflict resolutions)
+
+2. SUMMARY OF VERIFIED FACTS VS. REMAINING UNKNOWNS (PROVENANCE BRIEFING)
+--------------------------------------------------------------------
+Full provenance is documented in `docs/research/00..03`. Do not hallucinate beyond these established boundaries:
+
+A. VERIFIED FACTS:
+   - Repository State (`00_Repository_State.md`): `FrostyPickaxe` (`https://github.com/RibhuNoodleBoodle/FrostyPickaxe`) is a clean, newly initialized research repository. Zero Xbox 360 game binaries (`default.xex`, `.xexp`), game assets (`.tiger`, `.bik`, `.xma`, STFS packages), ReXGlue SDK checkouts, or generated C++ files currently exist in the workspace.
+   - Pinned ReXGlue SDK Baseline (`00_Repository_State.md`, `03_Sources_and_Evidence.md`):
+     * Upstream `rexglue/rexglue-sdk` latest stable release is `v0.10.0` (commit `c94f5ebdcb3c`, 2026-08-21); upstream `development` branch is at commit `bd833a2ab69d` (`0.10.0.24-dev`, 2026-10-02, 24 commits ahead of `v0.10.0`). Note that the upstream wiki `Home.md` contains an outdated `"v0.3.x"` banner that is superseded by the `v0.10.0` / `bd833a2ab69d` source tree.
+     * `bd833a2ab69d` contains essential fixes over `v0.10.0`: `stwcx.` migration to `std::atomic` CAS (`7f7c92ef6`), `sync`/`lwsync`/`eieio` memory fences (`bd833a2ab`), `vpkuwus`/`vpkuhus` aliasing fix (`6319e236d`), `XamContent` `X_ERROR_SUCCESS` check (`ee20900ef`), SDL3 bumped to `3.4.14` (`4c1350847`), and gamepad rumble/deadzone/hotplug refinements (`3cd72439f`).
+     * In `CMakeLists.txt` (lines 37–43), Windows defaults to `REXGLUE_USE_D3D12=ON` and `REXGLUE_USE_VULKAN=OFF`, whereas Linux defaults to `REXGLUE_USE_VULKAN=ON`.
+     * Community precedent audit (`CrownParkComputing/Xbox360-Native-Ports`, `docs/REXGLUE_FORK_CHANGES.md`) proves that stock ReXGlue `v0.10.0` still suffers from critical runtime/GPU defects on demanding retail games: `KeInsertQueueDpc` never drains in Release builds; `WaitMultiple` busy-polls at 1ms and wakes auto-reset events non-FIFO; `db16cyc` spin hints are ignored; out-of-range `bctr` switch indices emit `__builtin_trap()`; 3D LUT volume textures sampled via 2D fetches lose `Z>0` slices; `exp_adjust` reads word 4 instead of word 3; and shared-memory page write-watches trigger hundreds of render-pass breaks per frame during streaming. Both `CrownParkComputing` and `deivid22srk` proved that `rexgpu-native` (bypassing EDRAM) is unusable for 3D games, confirming that ReXGlue's Xenos Vulkan backend (`src/graphics/vulkan/`) must be used.
+   - Target Game Characteristics (`01_Feasibility_Report.md`, `03_Sources_and_Evidence.md`):
+     * *Rise of the Tomb Raider* Xbox 360 release (Title ID `53510823`, Nov 2015) was ported by Nixxes Software on the Foundation Engine (720p native with FXAA, 30 FPS target, 512 MB unified RAM, pre-recorded video cutscenes, ~6.23 GB across 2 discs: Disc 1 Mandatory Install STFS package + Disc 2 Play Disc).
+     * Xenia Canary Compatibility Issue #174 (`53510823`) confirms: (1) Base `default.xex` infinite-loads after pressing Start unless a **Title Update (TU)** is applied; (2) Title is tagged `gpu-drawing-corrupt`, `gpu-readback`, and `tech-middleware-scaleform`, exhibiting purple/magenta color corruption on the title screen and severe rendering corruption in the prologue.
+   - Intel HD Graphics 620 Baseline (`01_Feasibility_Report.md`):
+     * Supports Vulkan 1.3 (Intel Article `000005524`) and passes ReXGlue's hard feature checks (`independentBlend`, `fragmentStoresAndAtomics`, `vertexPipelineStoresAndAtomics`), **but does NOT support `VK_EXT_fragment_shader_interlock`**, forcing `Path::kHostRenderTargets` (`render_target_path_vulkan = "fbo"`).
+
+B. REMAINING UNKNOWNS (REQUIRE GATE G1 BINARY ANALYSIS OR HARDWARE EXECUTION):
+   - `UNKNOWN`: Exact function count, `.pdata` coverage, import ordinal list, `CreateFiber` usage, and `.xexp` Title Update structure of user-owned `53510823` binaries (`UNK-01`, `UNK-03`).
+   - `UNKNOWN`: Whether the purple/magenta corruption and prologue rendering errors in `53510823` are completely resolved by the 3D-as-2D LUT wrapper, `exp_adjust` fix, and `fbo` gamma RT tuning, or require additional shader microcode fixes (`INF-01`).
+   - `UNKNOWN`: Actual measured CPU/GPU frame times and memory usage on Intel HD Graphics 620 (`UNK-02`).
+
+3. REQUIRED PHASE 1 DELIVERABLES (DESIGN LEVEL ONLY — NO CODING)
+--------------------------------------------------------------------
+Produce the following architectural documents under `docs/architecture/` (or present them as structured architectural specifications as directed by the user):
+
+1. System Architecture & Decision Record (`docs/architecture/01_System_Architecture_ADR.md`):
+   - Pinned SDK strategy (`bd833a2ab69d` + curated backports for `KeInsertQueueDpc`, `WaitMultiple` FIFO blocking, `db16cyc`, `bctr` fallback, 3D-as-2D LUT view, `exp_adjust`, and hot-page shared-memory residency).
+   - Offline `default.xex` + `.xexp` (Title Update) static merge and codegen pipeline architecture.
+   - Multi-disc VFS & XAM content mounting architecture (`Disc 2 game:` + `Disc 1 Content\0000000000000000\53510823\00000002\` + `TU overlay` + writable `cache:`).
+   - Vulkan `fbo`-path rendering & Intel HD 620 optimization architecture (`render_target_path_vulkan="fbo"`, shared-memory hot-page batching, dynamic constant buffers, seeded `.vk.xpso` cache, Windows vs. Linux driver configuration).
+   - SDL3 controller input (`InputSystem` recursive mutex) and Wwise/XMA paced 187.5 Hz audio + Bink video architecture.
+   - Enforcement of Android Architecture-Preservation Rules (`AP-1`..`AP-5`) and Clean-Room Provenance (keeping `game/` and `generated/` out of Git).
+
+2. Modular Responsibility Map (`docs/architecture/02_Modular_Responsibility_Map.md`):
+   - Clear boundary definition between:
+     (a) Upstream `rexglue-sdk` submodules/libraries,
+     (b) Required SDK-level runtime/Vulkan/codegen patches (`patches/sdk/`),
+     (c) Title-specific `FrostyPickaxeApp` (`ReXApp` hooks, VFS mounting, CVar profile, function/switch overrides), and
+     (d) Local-only user-supplied assets (`game/`, `content.sha256`) and machine-generated C++ (`generated/`).
+
+3. Risk-Prioritized Discovery Plan & Validation Gate Specification (`docs/architecture/03_Discovery_Plan_and_Gates.md`):
+   - Step-by-step technical protocol for executing Falsifiable Experiments `EXP-01` through `EXP-06` and evaluating Decision Gates `G1` through `G5` across Milestones `M1` (Compiles) through `M6` (Acceptable on Intel HD 620).
+
+4. Design-Level Future Worker Task Decomposition (`docs/architecture/04_Worker_Task_Decomposition.md`):
+   - Decompose future implementation work into bounded, dependency-ordered engineering work packages (WP-1 through WP-N) with explicit inputs, outputs, and pass/fail gates **at design level only**.
+
+4. EXPLICIT STOP CONDITIONS AND ARCHITECTURE DECISION GATE
+--------------------------------------------------------------------
+- **HARD STOP BEFORE IMPLEMENTATION:** In this Phase 1 session, you MUST STOP after producing the four architectural design documents above.
+- Do NOT write C++ code, CMakeLists, TOML manifests, patch files, or executable worker task prompts in this session.
+- Conclude your Phase 1 response with the **Architecture Decision Gate Checklist**, requesting:
+  1. User review and approval of the System Architecture & Discovery Plan;
+  2. Confirmation that the user has locally staged the lawful Xbox 360 Disc 1 Content, Disc 2 `default.xex`, and Title Update for Title ID `53510823` (Gate G1); and
+  3. Explicit user authorization to generate Phase 2 worker execution prompts / build scaffolding.

@@ -1,0 +1,61 @@
+====================================================================
+GEMINI ARGON — SESSION 3: REQUIRED ARCHITECTURAL SKILL DOMAINS
+PROJECT: FrostyPickaxe (Rise of the Tomb Raider [Xbox 360, Title ID 53510823])
+====================================================================
+
+1. GENERALANALYTICAL RIGOR RULES
+--------------------------------------------------------------------
+- Never claim access to proprietary tools, private keys, or local Xbox 360 game binaries (`default.xex`, `.xexp`, `.tiger`) unless they are verifiably present in the workspace.
+- Pin every technical reference to an exact upstream revision (e.g., `rexglue/rexglue-sdk` `v0.10.0` `c94f5ebdcb3c` or `development` `bd833a2ab69d` as of 2026-10-02) and source path.
+- Label any unverified binary-dependent parameter as `UNKNOWN [Requires Gate G1 Binary Analysis]`.
+
+2. REQUIRED SKILL DOMAINS, ANALYTICAL OUTPUTS, CHECKS, AND ESCALATION CRITERIA
+--------------------------------------------------------------------
+
+DOMAIN 01: Xenon PowerPC & VMX128 ISA Semantics
+- Scope: 64-bit PowerPC AS v2.02 running in 32-bit big-endian guest mode, 128-register VMX128 vector unit, FPU vs. VMX denormal flush modes (`CSRState`), atomic reservation (`lwarx`/`stwcx.`), memory barrier instructions (`sync`, `lwsync`, `eieio`), and hardware thread delay hints (`db16cyc`).
+- Expected Analytical Output: Mapping of Foundation Engine / Scaleform instruction idioms to ReXGlue codegen handlers (`src/codegen/ppc/`), verifying inclusion of `bd833a2ab69d` fixes (`vpkuwus`/`vpkuhus` aliasing `6319e236d`, `stwcx.` atomic CAS `7f7c92ef6`, memory fences `bd833a2ab`) and `db16cyc -> std::this_thread::yield()`.
+- Checks & Gaps: Check whether any unimplemented VMX128 integer/perm opcodes exist in `53510823` during `EXP-01`/`EXP-02`.
+- Escalation Criterion: If `rexglue codegen` encounters unrecognized PPC/VMX128 opcodes or inline assembly idioms in `53510823`, halt build and specify exact instruction handler additions required in `src/codegen/`.
+
+DOMAIN 02: XEX2 Binary Format, `.xexp` Delta Patching & Static AOT Recompilation
+- Scope: Xbox 360 XEX2 header parsing, PE section layout, compression/encryption flags, `.pdata` (`IMAGE_CE_RUNTIME_FUNCTION`) exception tables, Title Update `.xexp` binary delta application, function boundary discovery (`phase_discover.cpp`, `phase_gapfill.cpp`), and `bctr` switch table recovery (`function_scanner.cpp`).
+- Expected Analytical Output: Design of the offline `default.xex` + Title Update `.xexp` static merge pipeline (`EXP-01`) and manifest override architecture (`[entrypoint.functions]`, `[[switch_tables]]`, `setjmp_address`, `enable_exception_handlers`) plus the `bctr` CTR-fallback design (`EXP-02`).
+- Checks & Gaps: Currently `UNKNOWN` how many functions or switch tables exist in `53510823` until user supplies `default.xex` + TU.
+- Escalation Criterion: If `.xexp` cannot be statically merged into `default.xex` or if `53510823` executes dynamically decrypted code overlays or JIT bytecode from the heap, trigger Gate G1/G2 STOP.
+
+DOMAIN 03: ReXGlue Runtime Architecture & Guest Kernel / XAM Subsystem
+- Scope: `ReXApp` lifecycle (`include/rex/rex_app.h`), `FunctionDispatcher` guest-to-host call table, `ExportResolver`, kernel object model (`src/kernel/xboxkrnl/`, `src/kernel/xam/`), threading (`XThread`), synchronization (`WaitMultiple`, auto-reset events, mutanten, semaphores), DPC queues (`KeInsertQueueDpc`), and guest fibers (`fiber_win32.cpp`, `fiber_posix.cpp`).
+- Expected Analytical Output: Architectural specification for patching upstream `v0.10.0` kernel bugs (`KeInsertQueueDpc` inline execution, blocking `WaitMultiple` with FIFO auto-reset wakes, timer queue blocking wait, host thread FP exception masking) and auditing missing XAM/kernel ordinals in `53510823`.
+- Checks & Gaps: Verify `ee20900ef` (`XamContent` `X_ERROR_SUCCESS` check) and `0c7b01a0a` (kernel handle leak fix) from `bd833a2ab69d`.
+- Escalation Criterion: If `53510823` deadlocks on Start-screen transition even after TU application and `KeInsertQueueDpc`/`WaitMultiple` fixes (`EXP-03`), require guest wait watchdog (`guest_wait_report_seconds`) diagnostics before further kernel changes.
+
+DOMAIN 04: Xenos GPU Architecture, EDRAM Emulation & Shader Translation
+- Scope: Xenos PM4 command processor (`src/graphics/command_processor.cpp`), ALU/fetch microcode to SPIR-V translation (`shader.cpp`, `pipeline_cache.cpp`), SSBO vertex fetch (`vfetch`), texture fetch constants (`tfetch`), 10 MB EDRAM tile management (`render_target_cache.cpp`), resolve copies, and shared memory residency (`shared_memory.cpp`).
+- Expected Analytical Output: Architectural design for resolving Xenia Canary Issue #174's `gpu-drawing-corrupt` and `gpu-readback` hazards solely within `Path::kHostRenderTargets` (`fbo` mode): 3D-as-2D volume LUT texture wrapping (`VK_IMAGE_CREATE_2D_ARRAY_COMPATIBLE_BIT`), `exp_adjust` fetch-constant word-3 fix, `k_8_8_8_8_GAMMA` RT handling, and EDRAM resolve readback diagnostics (`EXP-04`, `EXP-05`).
+- Checks & Gaps: Never propose `rexgpu-native` (proven broken on 3D titles). Verify whether `53510823` requires synchronous `vulkan_readback_resolve`.
+- Escalation Criterion: If `53510823` requires per-pixel EDRAM format aliasing that only works under `Path::kPixelShaderInterlock` (`fsi`), trigger Gate G3 STOP for Intel HD 620.
+
+DOMAIN 05: Vulkan 1.3 Backend, Extensions & Cross-Platform Driver Stack (Windows DCH vs. Linux Mesa ANV)
+- Scope: `src/ui/vulkan/vulkan_device.cpp`, `vulkan_instance.cpp`, `vulkan_presenter.cpp`, `VK_KHR_dynamic_rendering` vs. `VkRenderPass`, `VK_KHR_sampler_ycbcr_conversion`, `VK_EXT_custom_border_color`, `VK_EXT_robustness2`, and CMake backend selection (`REXGLUE_USE_VULKAN`).
+- Expected Analytical Output: Unified Windows/Linux Vulkan configuration spec (overriding `CMakeLists.txt` default `REXGLUE_USE_VULKAN=OFF` on Windows) and driver-divergence matrix comparing Windows Intel DCH (IGC compiler) against Linux Mesa ANV (NIR/BRW compiler).
+- Checks & Gaps: Ensure `vulkan_dynamic_rendering` fallback to `VkRenderPass` remains intact if Windows Gen9.5 DCH drivers exhibit dynamic rendering bugs.
+- Escalation Criterion: Any `VK_ERROR_DEVICE_LOST` or `VK_ERROR_INCOMPATIBLE_DRIVER` on HD 620 halts feature work until isolated via RenderDoc / Vulkan validation layers.
+
+DOMAIN 06: Intel Gen9.5 / HD Graphics 620 Hardware Limits & Performance Engineering
+- Scope: Kaby Lake GT2 architecture (24 EUs, 192 shading units, shared host DDR3/DDR4 memory at 17–34 GB/s, 15W TDP envelope, dual-core/4-thread host CPU pairing, absence of `VK_EXT_fragment_shader_interlock`).
+- Expected Analytical Output: Detailed design of the Shared-Memory Residency & CPU Overhead Mitigation subsystem (`gpu_hot_page_frames`, `clear_memory_page_state=false`, exact vertex-range residency checks, `vulkan_dynamic_constant_buffers`, material descriptor set caching, seeded `.vk.xpso` pipeline cache) and the Milestone M6 Instrumentation & Benchmarking Harness (`EXP-06`).
+- Checks & Gaps: Zero benchmarks exist today; all optimizations must have individual CVar kill-switches and report counters to per-frame CSV stats.
+- Escalation Criterion: If median frame time on HD 620 exceeds 50 ms (< 20 FPS) after residency and descriptor optimizations (`Gate G4`), escalate to user with measured bottleneck breakdown.
+
+DOMAIN 07: SDL3 Controller Abstraction, Audio (XMA/Wwise), Video (Bink), and Multi-Disc VFS
+- Scope: SDL 3.4.14 gamepad driver (`src/input/sdl/sdl_input_driver.cpp`), XAM input bridge (`src/input/input_system.cpp`), FFmpeg XMA audio decoder (`src/audio/xma_decoder.cpp`), Bink `.bik` video playback, and multi-disc VFS (`src/filesystem/`).
+- Expected Analytical Output: Thread-safe `InputSystem` mutex specification; paced 187.5 Hz guest audio callback specification; and multi-source VFS mounting design uniting Disc 2 (`game:`), Disc 1 STFS content (`Content\0000000000000000\53510823\00000002\`), Title Update files, and writable `cache:`.
+- Checks & Gaps: Exact file tree across Disc 1, Disc 2, and TU is `UNKNOWN` until Gate G1.
+- Escalation Criterion: Any audio ring-buffer deadlock or VFS missing-archive error during prologue load halts progression past Milestone M3/M4.
+
+DOMAIN 08: Portable C++23, Clean-Room Provenance & Deferred Android ARM64 Preservation
+- Scope: Clang 18+ C++23 portability, `simde` (`rex/vec128.h`), explicit `std::atomic` memory ordering for ARMv8-A compatibility, Android Bionic fiber (`ucontext`) gap awareness, SAF storage abstraction, and clean-room separation of open-source scaffolding from copyrighted game data and `generated/` C++ output.
+- Expected Analytical Output: Enforcement checklist for Architecture-Preservation Rules `AP-1` through `AP-5` and clean-room repository layout (`content.sha256` local verification without committing game binaries or `generated/` code).
+- Checks & Gaps: Verify whether `53510823` imports `CreateFiber`/`SwitchToFiber` during `EXP-01`.
+- Escalation Criterion: Any proposed design that embeds copyrighted binaries/assets in Git or introduces x86-only/D3D12-only lock-in is immediately rejected.

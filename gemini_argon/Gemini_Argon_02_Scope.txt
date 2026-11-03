@@ -1,0 +1,63 @@
+====================================================================
+GEMINI ARGON — SESSION 2: ARCHITECTURAL SCOPE, GATES, AND EXCLUSIONS
+PROJECT: FrostyPickaxe (Rise of the Tomb Raider [Xbox 360, Title ID 53510823])
+====================================================================
+
+1. MANDATORY TARGET ORDER AND PROJECT GOALS
+--------------------------------------------------------------------
+Your architectural scope is governed by a strict, non-negotiable priority order:
+
+A. SOURCE MATERIAL (MANDATORY):
+   - *Rise of the Tomb Raider* — Xbox 360 release ONLY (Title ID `53510823`, developed by Nixxes Software / Crystal Dynamics on the Foundation Engine, released November 2015).
+   - Retail 2-disc topology (~6.23 GB total):
+     * Disc 1 (Install Disc): Mandatory STFS content packages installed into `Content\0000000000000000\53510823\00000002\`.
+     * Disc 2 (Play Disc): Entrypoint `default.xex` and main `.tiger` (`bigfile.*.tiger`) streaming archives.
+     * Title Update (TU): Official Xbox 360 Title Update (up to TU6, containing `.xexp` patch and updated archives), which `xenia-canary/game-compatibility#174` proves is MANDATORY to pass the Start-screen infinite loading loop.
+   - Do NOT substitute the commercial PC, Xbox One, or PS4 versions. The commercial PC edition may only be referenced externally as a visual/behavioral sanity baseline.
+
+B. FIRST-CLASS TARGET (ACTIVE ARCHITECTURAL FOCUS):
+   - Native PC `x86-64` (Windows 10/11 and Linux `x86-64` treated separately where driver/build behavior diverges).
+   - ReXGlue SDK pinned to `development` commit `bd833a2ab69d` (2026-10-02, `0.10.0.24-dev`, 24 commits ahead of `v0.10.0` `c94f5ebdcb3c`) as the candidate static recompilation and guest runtime foundation.
+   - Vulkan 1.3 backend (`src/graphics/vulkan/` and `src/ui/vulkan/`), explicitly forcing `-DREXGLUE_USE_VULKAN=ON` on Windows (where upstream `CMakeLists.txt` defaults `REXGLUE_USE_VULKAN=OFF` and `REXGLUE_USE_D3D12=ON`).
+   - SDL3 (`thirdparty/sdl3`, release `3.4.14` in `bd833a2ab69d`) for windowing, audio output, and host controller abstraction (`src/input/sdl/sdl_input_driver.cpp`) bridged cleanly to guest XAM input (`XamInputGetState` / `XamInputSetState`).
+   - Minimum Target GPU Gate: **Intel HD Graphics 620** (Kaby Lake GT2, Gen9.5, 24 EUs, shared host RAM, no `VK_EXT_fragment_shader_interlock`).
+
+C. DEFERRED TARGET (ARCHITECTURE-PRESERVATION ONLY — DO NOT DESIGN FOR PARALLEL BUILD):
+   - Android `arm64-v8a` with Vulkan and SDL3 gamepad/touch UI.
+   - Android is STRICTLY BLOCKED/DEFERRED until PC Milestones M1–M6 pass.
+   - Within this PC architecture phase, your scope regarding Android is limited to enforcing the five Architecture-Preservation Rules (`AP-1` through `AP-5` in `docs/research/01_Feasibility_Report.md`) so PC decisions do not block Android later.
+
+2. TITLE-SPECIFIC ARCHITECTURAL REQUIREMENTS (NO GENERIC TEMPLATES)
+--------------------------------------------------------------------
+Your architectural plan must directly address the specific findings for Title ID `53510823` documented in `docs/research/01_Feasibility_Report.md` and `docs/research/02_Risks_Unknowns_and_Gates.md`:
+
+1. Offline `.xexp` Title Update Merging & Static Codegen Pipeline (`BLK-01`):
+   - Because static AOT recompilation (`rexglue codegen`) operates on a static XEX image on disk rather than patching pages in RAM at runtime, define the architectural workflow for inspecting and applying the Title Update `.xexp` delta patch to Disc 2's `default.xex` before invoking `rexglue codegen`.
+2. Scaleform GFx & Foundation Engine Codegen Resilience (`BLK-07`):
+   - Address indirect `bctr` jump tables, C++ exception handling (`enable_exception_handlers`, `.pdata`), `setjmp`/`longjmp`, out-of-line basic blocks past mid-function `blr`, and the upstream `v0.10.0` bug where out-of-range switch indices emit `__builtin_trap()` instead of falling back to `CTR` dispatch.
+3. Guest Kernel, Threading, and Synchronization Completeness (`BLK-04`):
+   - Address the critical upstream ReXGlue `v0.10.0` runtime gaps identified in the Phase 0 research:
+     * `KeInsertQueueDpc` (upstream appended to `dpc_list` without draining in Release builds, dropping async completion signals).
+     * `WaitMultiple` 1ms polling loop and non-FIFO auto-reset event wakes causing thread starvation.
+     * `db16cyc` PowerPC delay instruction lowering to `std::this_thread::yield()` to prevent Foundation Engine streaming spin-loops from saturating 2-core Intel HD 620 host CPUs.
+     * Host FP exception masking across all threads executing guest code (`InitHost()`).
+     * Guest fiber (`CreateFiber` / `SwitchToFiber`) audit and abstraction.
+4. Multi-Disc VFS & XAM Content Architecture (`BLK-06`):
+   - Design the `ReXApp` path and XAM content mounting topology uniting Disc 2 (`game:\`), Disc 1's mandatory STFS content package (`Content\0000000000000000\53510823\00000002\`), the Title Update overlay, save data storage, and a writable `cache:\` partition.
+5. Xenos Vulkan `fbo` Path & Visual Corruption Resolution (`BLK-02`, `BLK-03`):
+   - Because Intel HD 620 lacks `VK_EXT_fragment_shader_interlock`, design exclusively around `Path::kHostRenderTargets` (`render_target_path_vulkan = "fbo"`).
+   - Address the known `gpu-drawing-corrupt` (purple/magenta tint on title screen and prologue corruption) and `gpu-readback` flags from Xenia Canary Issue #174 — specifically incorporating the 3D-as-2D LUT volume texture wrapper (`VK_IMAGE_CREATE_2D_ARRAY_COMPATIBLE_BIT`), `exp_adjust` word-3 fetch fix, 16-bit host render-target format compatibility (`R16G16`, `R16G16B16A16`, `gamma_render_target_as_unorm16`), and diagnostic isolation of `vulkan_readback_resolve` / `vulkan_readback_memexport`.
+6. Intel HD Graphics 620 Shared-Memory & CPU Performance Architecture (`BLK-05`):
+   - Design the shared-memory residency and CPU overhead mitigation layer: hot-page upload batching (`gpu_hot_page_frames`, `clear_memory_page_state = false`), exact vertex-range residency checks, lock-free page-validity bitmaps, dynamic uniform buffers (`vulkan_dynamic_constant_buffers`), material descriptor caching, and seeded `.vk.xpso` pipeline caches.
+7. Audio, Video, and SDL3 Controller Architecture (`BLK-08`):
+   - Preserve guest Wwise/FMOD software/XMA mixing with paced 187.5 Hz callbacks (`audio_pace_callback`) and `xenia-canary` XMA ring-buffer starvation fixes (explicitly rejecting `audio_native_xma`).
+   - Ensure Bink Video (`.bik`) pre-rendered cutscenes (which replace real-time cutscenes in the Xbox 360 edition) decode and present cleanly via Vulkan YCbCr samplers.
+   - Ensure thread-safe recursive mutex serialization in `InputSystem` between guest `XamInput*` polling threads and main-thread SDL3 hotplug/focus events.
+
+3. STRICT EXCLUSIONS (WHAT YOU MUST NOT DO OR PLAN YET)
+--------------------------------------------------------------------
+- Do NOT write or modify any source code, CMake files, manifests, patches, or scripts in this session.
+- Do NOT propose building a new custom rendering engine from scratch (`rexgpu-native` bypassing EDRAM has already failed in both `CrownParkComputing` and `deivid22srk` for complex 3D games; you must audit and architect fixes for ReXGlue's Xenos Vulkan backend `src/graphics/vulkan/`).
+- Do NOT propose swapping commercial PC `.tiger` archives or x86 executables into the Xbox 360 port.
+- Do NOT design or schedule parallel Android build tasks, Gradle scripts, or JNI bridges in Phase 1.
+- Do NOT bypass any of the sequential Decision Gates (`G0` through `G5`) or equate Milestone `M1` (Compiles) with `M3` (Renders Menu), `M5` (Playable), or `M6` (Acceptable on Intel HD 620).
