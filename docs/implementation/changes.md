@@ -54,4 +54,25 @@ Last updated: 2026-11-05 (Step 01 repository audit & privacy boundaries)
 - **Rationale**: ADR-01 / ADR-03 requires a clean, reproducible baseline build and complete executed test inventory with zero test failures before advancing to game codegen.
 - **Verification / Test**: Executed CTest across all 1,671 tests: 1,458 PPC instruction tests (100%) PASSED; 209 unit tests (100%) PASSED; 4 skipped by upstream; 0 failed. Installed cleanly to `.local/sdk/rexglue-sdk/out/install/linux-amd64/`. CLI executable verified functional.
 
+---
+
+## Change Entry: CHG-004 (Step 04 - Project Scaffold & Strict Codegen Milestone M2)
+- **Date**: 2026-11-05
+- **Author**: Gemini Flash (Implementer)
+- **Files Created**:
+  - `port/CMakeLists.txt`: Project CMake definition targeting C++23, defining `rise360` executable and recomp target.
+  - `port/CMakePresets.json`: Configure/build presets specifying Clang toolchain and Ninja generator.
+  - `port/cmake/rexglue.cmake`: ReXGlue build glue handling SDK discovery, recomp object compilation, and codegen custom targets.
+  - `port/src/main.cpp`: Application entrypoint declaring `Rise360App` via `REX_DEFINE_APP`.
+  - `port/src/rise360_app.h`: ReXApp subclass header providing lifecycle hook overrides.
+  - `port/rise360_manifest.toml` (ignored): Private project manifest configuring entrypoint `default.xex` and declared branch target `0x82C21240`.
+  - `port/generated/default/` (ignored): 421 generated source/header files (207 recomp translation units).
+- **Rationale**: ADR-04 / ADR-05 requires setting up a clean, non-derivative project scaffold in `port/` and running strict code generation against the provisioned base XEX, ensuring zero critical gaps, while keeping proprietary generated code and manifests completely untracked.
+- **Verification / Test**:
+  1. Ran `rexglue codegen rise360_manifest.toml --ignore-stamp`: discovered and recompiled 45,104 functions into 207 translation units with 0 validation errors; generated input fingerprint `a726442c842406c1d2bd3305b16bb0b7`.
+  2. Verified incremental codegen caching (0 written, 1 up to date in 0.2s).
+  3. Ran CMake configure on `port/`: successfully resolved ReXGlue SDK 0.10.0 and generated build targets.
+  4. Compiled `main.cpp.o` and recompiled translation unit `rise360_recomp.0.cpp.o` with Clang 21 with zero errors.
+  5. Verified `git status`: confirmed `port/generated/` and `port/rise360_manifest.toml` remain completely untracked and ignored.
+
 

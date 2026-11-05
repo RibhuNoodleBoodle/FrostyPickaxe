@@ -16,4 +16,6 @@ Last updated: 2026-11-05 (Step 01 audit)
 | Intel HD Graphics 620 Vulkan Support | ADR-01 / ADR-06 | **VERIFIED (Preflight)**| `vulkaninfo --summary` exit 0, Intel HD Graphics 620 [8086:5916], Vulkan 1.4.335, Mesa 26.0.8-1ubuntu0.3 | `docs/implementation/environment.md` |
 | Base disc extraction & default.xex SHA-256 | ADR-02 | **VERIFIED** | 84 files provisioned to `.local/rise360/game-base/`; `default.xex` SHA-256 `47e6476f6d393d86612e7af938979e9c706b54dc526d8422413711999d41e585` | `docs/implementation/commands.md` |
 | Title Update quarantined | ADR-02 | **VERIFIED** | Outer STFS metadata audited: Media ID `2427ED57` vs Base `0A657B25`; quarantined in `.local/rise360/analysis/` | `docs/implementation/commands.md` |
-| Authentic 10-Minute Gameplay Acceptance | ADR-08 / Gemini_90 | **NOT TESTED** | Blocked on Steps 02-10 | Dependent on future milestones |
+| ReXGlue SDK Baseline & Test Suite (M1) | ADR-01 / ADR-03 | **VERIFIED** | Pinned commit `c94f5eb`; 1,671 CTest tests executed (1,458 PPC 100%, 209 unit tests 100%, 0 failed); installed to `.local/sdk/rexglue-sdk/out/install/linux-amd64/` | `docs/implementation/commands.md`, `status.md` |
+| Strict Codegen & Scaffold (M2) | ADR-04 / ADR-05 | **VERIFIED** | Strict codegen: 45,104 functions recompiled, 207 TUs, 0 validation errors, fingerprint `a726442c842406c1d2bd3305b16bb0b7`; Clang 21 test compile passed | `docs/implementation/commands.md`, `changes.md` |
+| Authentic 10-Minute Gameplay Acceptance | ADR-08 / Gemini_90 | **NOT TESTED** | Blocked on Steps 05-10 | Dependent on future milestones |

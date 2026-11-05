@@ -12,8 +12,8 @@ Implementer: Gemini Flash
 |---|---|---|---|---|---|
 | **M0** | Step 01 / 02 | Audit baseline, private path exclusions, base-disc provisioning & TU analysis | **PASS** | Clean repository state, user architect delegation | Step 01 passed: `.gitignore` protects private paths; hardware probed. Step 02 passed: GDFX provisioner extracted 84 files to `.local/rise360/game-base/` with SHA-256 match for `default.xex`; TU audited and quarantined. |
 | **M1** | Step 03 | SDK-only baseline (pinned ReXGlue `c94f5eb`, recursive submodules, build & test) | **PASS** | Step 01 PASS | Pinned SDK clone `c94f5ebdcb3c9d1a460ca48e04f9758448f8d518` & 22 recursive submodules locked. Clang 21.1.8 toolchain in `.local/toolchain/`. Built Release mode; 1,671 CTest tests executed: 1,458/1,458 PPC instructions passed (100%), 209/209 active unit tests passed (4 skipped by upstream), 0 failures. Installed to `.local/sdk/rexglue-sdk/out/install/linux-amd64/`. CLI verified. |
-| **M2** | Step 04 | Strict game-specific codegen (`rise360` scaffold & strict base XEX translation) | **READY** | Step 02 (G1-base PASS) + Step 03 (M1 PASS) | Both prerequisites G1-base and M1 PASSED. Ready to invoke `rexglue init` and `rexglue codegen`. |
-| **M3** | Step 05 | Runtime, guest services, VFS & thin app integration | **BLOCKED** | Step 04 (M2 PASS) | Dependent on strict codegen output. |
+| **M2** | Step 04 | Strict game-specific codegen (`rise360` scaffold & strict base XEX translation) | **PASS** | Step 02 (G1-base PASS) + Step 03 (M1 PASS) | Scaffold configured in `port/`; `rise360_manifest.toml` configured with entrypoint `default.xex` and entrypoint branch target `0x82C21240`. Strict codegen completed in 149.6s: 45,104 functions discovered and recompiled into 207 translation units (`port/generated/default/`); 0 validation errors; deterministic fingerprint `a726442c842406c1d2bd3305b16bb0b7`. CMake configured `rise360` executable and successfully test-compiled recompiled TU with Clang 21. |
+| **M3** | Step 05 | Runtime, guest services, VFS & thin app integration | **READY** | Step 04 (M2 PASS) | Strict codegen output ready for runtime and VFS integration. |
 | **M4** | Step 06 | Vulkan HD 620 device validation & Xenos frame path | **BLOCKED** (for title) / **PREFLIGHT PASS** | Step 05 (for title); Step 01 (for device preflight) | Hardware Vulkan 1.4.335 on HD 620 confirmed; actual title frame validation blocked on M3. |
 | **M5** | Step 07 | SDL-to-guest controller mapping and semantics | **BLOCKED** | Step 05; Step 06 for visual proof | Synthetic mapping can prepare after M3; full interactive acceptance requires M4. |
 | **M6** | Step 08 | Audio, media, streaming and scene loading | **BLOCKED** | Step 05; Step 06/07 for integrated trial | Codec/timing integration. |
@@ -33,8 +33,8 @@ Implementer: Gemini Flash
 | **E1-base** | Step 02 | Base-disc container validation & lawful local provisioning to `.local/rise360/game-base/` | **PASS** | `tools/gdfx_provisioner.py`, `.local/rise360/metadata/base_manifest.json`, `default.xex` SHA-256 `47e6476f6d393d86612e7af938979e9c706b54dc526d8422413711999d41e585` |
 | **E1-update**| Step 02 | TU container/metadata analysis & delta applicability classification | **AUDITED / QUARANTINED** | `tools/analyze_tu.py`, `.local/rise360/analysis/tu_analysis.json` (Media ID mismatch: `2427ED57` vs `0A657B25`) |
 | **E2-sdk** | Step 03 | Pin `c94f5eb`, recursive submodule lock, build, CTest suite, install | **PASS** | Pinned SDK installed to `.local/sdk/rexglue-sdk/out/install/linux-amd64/`; CTest 1,671 tests (1,458 PPC 100%, 209 unit tests 100%, 0 failed). |
-| **E2-cpu** | Step 04 | Strict discovery/codegen for base XEX, coverage & entrypoint audit | **READY** | Prerequisites E1-base and E2-sdk both satisfied. |
-| **E3-runtime**| Step 05 | Real startup trace, kernel/XAM services, memory/threads/waits, single-disc VFS | **BLOCKED** | Dependent on E2-cpu |
+| **E2-cpu** | Step 04 | Strict discovery/codegen for base XEX, coverage & entrypoint audit | **PASS** | 45,104 functions, 207 recomp files, 0 validation errors, fingerprint `a726442c842406c1d2bd3305b16bb0b7`. |
+| **E3-runtime**| Step 05 | Real startup trace, kernel/XAM services, memory/threads/waits, single-disc VFS | **READY** | Ready to proceed with Step 05 runtime and guest service integration. |
 | **E4-device** | Step 06 | Query HD 620 driver/features/limits; verify graphical session | **PREFLIGHT PASS** | `vulkaninfo --summary` exit 0, HD 620 Vulkan 1.4.335 |
 | **E4-frames** | Step 06 | Title-generated frames, reference comparison, shader/EDRAM diagnosis | **BLOCKED** | Dependent on E3-runtime |
 | **E3-input** | Step 07 | SDL controller bridge, guest XInput state, focus/hotplug | **BLOCKED** | Dependent on E3-runtime |
@@ -56,5 +56,7 @@ Step 01 (PASS)
   │
   └──> Step 03: ReXGlue SDK Baseline (E2-sdk) [PASS]
           │
-          └──> (Join Step 02 G1-base + Step 03 M1) ──> Step 04: Strict Codegen (E2-cpu) [READY]
+          └──> (Join Step 02 G1-base + Step 03 M1) ──> Step 04: Strict Codegen (E2-cpu) [PASS]
+                                                              │
+                                                              └──> Step 05: Runtime & VFS (E3-runtime) [READY]
 ```

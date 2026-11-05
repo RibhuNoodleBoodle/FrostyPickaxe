@@ -50,3 +50,15 @@ Last updated: 2026-11-05 (Step 01 repository audit & privacy setup)
 | 2026-11-05 16:00 UTC | `/mnt/6421-8598/building/FrostyPickaxe` | `cmake --install .local/sdk/rexglue-sdk/out/build/linux-amd64 --config Release` | `0` | Installed to `.local/sdk/rexglue-sdk/out/install/linux-amd64/` |
 | 2026-11-05 16:00 UTC | `/mnt/6421-8598/building/FrostyPickaxe` | `.local/sdk/rexglue-sdk/out/install/linux-amd64/bin/rexglue --help` | `0` | Verified installed CLI binary functional |
 
+## Step 04 Execution Log
+
+| Date / UTC | Working Directory | Command | Exit Code | Purpose / Output Summary |
+|---|---|---|---|---|
+| 2026-11-05 16:03 UTC | `/mnt/6421-8598/building/FrostyPickaxe` | `rexglue init --project-name rise360 --project-root .local/rise360/scaffold --xex-path .../default.xex --game-root .../game-base --scan-dll` | `0` | Initialized reference project scaffold in `.local/rise360/scaffold/` |
+| 2026-11-05 16:04 UTC | `/mnt/6421-8598/building/FrostyPickaxe` | `cp scaffold/{CMakeLists.txt, CMakePresets.json, src/*} port/` | `0` | Adapted generic build glue into `port/` repository tree |
+| 2026-11-05 16:11 UTC | `/mnt/6421-8598/building/FrostyPickaxe/port` | `rexglue codegen rise360_manifest.toml --ignore-stamp` | `0` | Strict translation completed in 149.6s; 45,104 functions recompiled into 207 C++ TUs; 0 validation errors |
+| 2026-11-05 16:15 UTC | `/mnt/6421-8598/building/FrostyPickaxe/port` | `rexglue codegen rise360_manifest.toml` | `0` | Cache stamp verification: 0 written, 1 up to date in 0.2s |
+| 2026-11-05 16:15 UTC | `/mnt/6421-8598/building/FrostyPickaxe` | `cmake --preset linux-amd64-release -S port` | `0` | Configured `rise360` host application and recomp object targets with Clang 21 |
+| 2026-11-05 16:16 UTC | `/mnt/6421-8598/building/FrostyPickaxe` | `ninja -C port/out/build/linux-amd64-release CMakeFiles/rise360.dir/src/main.cpp.o` | `0` | Clean test compilation of `main.cpp.o` |
+| 2026-11-05 16:16 UTC | `/mnt/6421-8598/building/FrostyPickaxe` | `ninja -C port/out/build/linux-amd64-release CMakeFiles/rise360_recomp.dir/generated/default/rise360_recomp.0.cpp.o` | `0` | Clean test compilation of recompiled PCH and translation unit 0 |
+
