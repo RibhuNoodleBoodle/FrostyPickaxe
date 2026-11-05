@@ -1,0 +1,16 @@
+diff --git a/src/core/CMakeLists.txt b/src/core/CMakeLists.txt
+index 1ddafd0..2ba1738 100644
+--- a/src/core/CMakeLists.txt
++++ b/src/core/CMakeLists.txt
+@@ -110,10 +110,10 @@ target_link_libraries(rexcore
+         simde
+         tomlplusplus
+         spdlog::spdlog
++        xxHash::xxhash
+     PRIVATE
+         disruptorplus
+         utf8cpp
+-        xxHash::xxhash
+ )
+ 
+ if(REXGLUE_USE_D3D12)

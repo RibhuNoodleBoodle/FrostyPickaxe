@@ -40,3 +40,14 @@ Last updated: 2026-11-05 (Step 01 repository audit & privacy boundaries)
 - **Rationale**: ADR-02 requires lawful local provisioning of the unmodified base disc build (Title 53510823, Media 0A657B25) without modifying input images or bypassing DRM, while keeping the Title Update quarantined.
 - **Verification / Test**: Synthetic unit tests passed (5/5). Extracted `default.xex` verified with SHA-256 `47e6476f6d393d86612e7af938979e9c706b54dc526d8422413711999d41e585`. All extracted files confirmed ignored by git.
 
+---
+
+## Change Entry: CHG-003 (Step 03 - ReXGlue SDK xxHash Public Dependency Patch)
+- **Date**: 2026-11-05
+- **Author**: Gemini Flash (Implementer)
+- **Files Created**:
+  - `patches/rexglue/0001-fix-rexcore-public-xxhash.patch`: Narrow upstream patch for `src/core/CMakeLists.txt`.
+- **Rationale**: `include/rex/hash.h` is a public SDK header that directly includes `<xxhash.h>`. In the upstream SDK, `xxHash::xxhash` was linked `PRIVATE` to `rexcore`, causing consumers (including the SDK's own unit test suite) to fail compilation with `'xxhash.h' file not found`. Moving `xxHash::xxhash` to `PUBLIC` dependencies of `rexcore` correctly propagates the include directory.
+- **Verification / Test**: Applied to `.local/sdk/rexglue-sdk/` and re-triggered CMake build.
+
+
