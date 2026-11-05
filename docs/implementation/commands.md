@@ -37,3 +37,16 @@ Last updated: 2026-11-05 (Step 01 repository audit & privacy setup)
 | 2026-11-05 15:21 UTC | `/mnt/6421-8598/building/FrostyPickaxe` | `sha256sum .local/rise360/game-base/default.xex` | `0` | `47e6476f6d393d86612e7af938979e9c706b54dc526d8422413711999d41e585` (matches R2) |
 | 2026-11-05 15:21 UTC | `/mnt/6421-8598/building/FrostyPickaxe` | `git check-ignore .local/rise360/game-base/default.xex` | `0` | Confirmed extracted files remain ignored by git |
 
+## Step 03 Execution Log
+
+| Date / UTC | Working Directory | Command | Exit Code | Purpose / Output Summary |
+|---|---|---|---|---|
+| 2026-11-05 15:25 UTC | `/mnt/6421-8598/building/FrostyPickaxe` | `git clone https://github.com/rexglue/rexglue-sdk.git .local/sdk/rexglue-sdk` | `0` | Cloned ReXGlue SDK repository |
+| 2026-11-05 15:27 UTC | `/mnt/6421-8598/building/FrostyPickaxe/.local/sdk/rexglue-sdk` | `git checkout c94f5ebdcb3c9d1a460ca48e04f9758448f8d518` | `0` | Checked out pinned SDK commit |
+| 2026-11-05 15:28 UTC | `/mnt/6421-8598/building/FrostyPickaxe/.local/sdk/rexglue-sdk` | `git submodule update --init --recursive` | `0` | Checked out all 22 recursive submodules |
+| 2026-11-05 15:32 UTC | `/mnt/6421-8598/building/FrostyPickaxe` | `cmake --preset ninja-multi-config -B .local/sdk/rexglue-sdk/out/build/linux-amd64` | `0` | Configured ReXGlue with Clang 21 toolchain and Vulkan backend |
+| 2026-11-05 15:58 UTC | `/mnt/6421-8598/building/FrostyPickaxe` | `cmake --build .local/sdk/rexglue-sdk/out/build/linux-amd64 --config Release -j4` | `0` | Built Release configuration: CLI, runtime, GPU plugin, SDL3, tests |
+| 2026-11-05 15:59 UTC | `/mnt/6421-8598/building/FrostyPickaxe` | `ctest --test-dir .local/sdk/rexglue-sdk/out/build/linux-amd64 -C Release --output-on-failure` | `0` | 1,671 tests executed: 1,458 PPC instructions passed (100%), 209 unit tests passed (100%), 4 skipped, 0 failed |
+| 2026-11-05 16:00 UTC | `/mnt/6421-8598/building/FrostyPickaxe` | `cmake --install .local/sdk/rexglue-sdk/out/build/linux-amd64 --config Release` | `0` | Installed to `.local/sdk/rexglue-sdk/out/install/linux-amd64/` |
+| 2026-11-05 16:00 UTC | `/mnt/6421-8598/building/FrostyPickaxe` | `.local/sdk/rexglue-sdk/out/install/linux-amd64/bin/rexglue --help` | `0` | Verified installed CLI binary functional |
+

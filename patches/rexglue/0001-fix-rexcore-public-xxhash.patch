@@ -1,3 +1,33 @@
+diff --git a/include/rex/chrono/chrono.h b/include/rex/chrono/chrono.h
+index d876846..6f76084 100644
+--- a/include/rex/chrono/chrono.h
++++ b/include/rex/chrono/chrono.h
+@@ -72,19 +72,18 @@ struct NtSystemClock {
+ 
+   // To convert XSystemClock to sys, do clock_cast<WinSystemTime>(tp) first
+   // Only available for Host domain (Guest time must be converted via clock_cast)
+-  static constexpr std::chrono::system_clock::time_point to_sys(const time_point& tp)
++  template <typename Duration = duration>
++  static constexpr std::chrono::sys_time<Duration> to_sys(const time_point& tp)
+     requires(domain_ == Domain::Host)
+   {
+-    using sys_duration = std::chrono::system_clock::duration;
+-    using sys_time = std::chrono::system_clock::time_point;
+-
+     auto dp = tp;
+     dp += unix_epoch_delta();
+-    auto cdp = std::chrono::time_point_cast<sys_duration>(dp);
+-    return sys_time{cdp.time_since_epoch()};
++    return std::chrono::time_point_cast<Duration>(
++        std::chrono::sys_time<duration>{dp.time_since_epoch()});
+   }
+ 
+-  static constexpr time_point from_sys(const std::chrono::system_clock::time_point& tp)
++  template <typename Duration>
++  static constexpr time_point from_sys(const std::chrono::sys_time<Duration>& tp)
+     requires(domain_ == Domain::Host)
+   {
+     auto ctp = std::chrono::time_point_cast<duration>(tp);
 diff --git a/src/core/CMakeLists.txt b/src/core/CMakeLists.txt
 index 1ddafd0..2ba1738 100644
 --- a/src/core/CMakeLists.txt
@@ -14,6 +44,19 @@ index 1ddafd0..2ba1738 100644
  )
  
  if(REXGLUE_USE_D3D12)
+diff --git a/src/kernel/xboxkrnl/xboxkrnl_rtl.cpp b/src/kernel/xboxkrnl/xboxkrnl_rtl.cpp
+index 8b862fc..3d166d4 100644
+--- a/src/kernel/xboxkrnl/xboxkrnl_rtl.cpp
++++ b/src/kernel/xboxkrnl/xboxkrnl_rtl.cpp
+@@ -494,7 +494,7 @@ u32 RtlTimeFieldsToTime_entry(ppc_ptr_t<X_TIME_FIELDS> time_fields_ptr, mapped_u
+     return 0;
+   }
+   auto dp = static_cast<std::chrono::sys_days>(year_month_day);
+-  std::chrono::system_clock::time_point time = dp;
++  auto time = std::chrono::sys_time<std::chrono::milliseconds>{dp};
+   time += std::chrono::hours{time_fields_ptr->hour};
+   time += std::chrono::minutes{time_fields_ptr->minute};
+   time += std::chrono::seconds{time_fields_ptr->second};
 diff --git a/tests/unit/CMakeLists.txt b/tests/unit/CMakeLists.txt
 index 7bd264b..e8689f2 100644
 --- a/tests/unit/CMakeLists.txt
@@ -26,3 +69,29 @@ index 7bd264b..e8689f2 100644
      ${CMAKE_CURRENT_SOURCE_DIR}
  )
  
+diff --git a/tests/unit/codegen/output_stamp_test.cpp b/tests/unit/codegen/output_stamp_test.cpp
+index d97edb5..99a2cfd 100644
+--- a/tests/unit/codegen/output_stamp_test.cpp
++++ b/tests/unit/codegen/output_stamp_test.cpp
+@@ -224,6 +224,6 @@ TEST_CASE("Depfile escapes characters make treats as syntax", "[output_stamp]")
+   std::ifstream in(depfile, std::ios::binary);
+   std::string content((std::istreambuf_iterator<char>(in)), std::istreambuf_iterator<char>());
+ 
+-  CHECK(content.find("has\ space.toml") != std::string::npos);
+-  CHECK(content.find("hash\#.toml") != std::string::npos);
++  CHECK(content.find(R"(has\ space.toml)") != std::string::npos);
++  CHECK(content.find(R"(hash\#.toml)") != std::string::npos);
+ }
+diff --git a/tests/unit/core/chrono_test.cpp b/tests/unit/core/chrono_test.cpp
+index dbd4caa..e111f97 100644
+--- a/tests/unit/core/chrono_test.cpp
++++ b/tests/unit/core/chrono_test.cpp
+@@ -228,7 +228,7 @@ static uint64_t recompose(int y, unsigned m, unsigned d, int hour, int min, int
+   if (!ymd.ok())
+     return 0;
+   auto dp = static_cast<std::chrono::sys_days>(ymd);
+-  std::chrono::system_clock::time_point time = dp;
++  auto time = std::chrono::sys_time<std::chrono::milliseconds>{dp};
+   time += std::chrono::hours{hour};
+   time += std::chrono::minutes{min};
+   time += std::chrono::seconds{sec};
