@@ -88,3 +88,13 @@ Last updated: 2026-11-05 (Step 01 repository audit & privacy setup)
 | 2026-11-05 19:14 UTC | `/mnt/6421-8598/building/FrostyPickaxe` | `cat /proc/bus/input/devices` | `0` | Audited host input devices: keyboard, mouse, ST LIS3LV02DL accelerometer (`js0`); confirmed no physical Xbox 360 controller connected |
 | 2026-11-05 19:19 UTC | `/mnt/6421-8598/building/FrostyPickaxe` | `python3 -m unittest tests/test_input_bridge.py` | `0` | Ran 7 synthetic mapping test cases: buttons, axes, Y-inversion, triggers, deadzones, packet counters, and disconnects (all passed) |
 | 2026-11-05 19:19 UTC | `/mnt/6421-8598/building/FrostyPickaxe` | `python3 -m unittest discover tests` | `0` | Full unit test discovery across `tests/`: 12/12 passed (0.002s) |
+
+## Step 08 Execution Log
+
+| Date / UTC | Working Directory | Command | Exit Code | Purpose / Output Summary |
+|---|---|---|---|---|
+| 2026-11-05 19:21 UTC | `/mnt/6421-8598/building/FrostyPickaxe` | `python3 [base_manifest.json media inventory]` | `0` | Inventoried 84 base files: verified `bigfile.000.tiger` (2.14GB), `bigfile.001.tiger` (130MB), 4 language packs, and 71 cinematic Bink videos (`.bik`) |
+| 2026-11-05 19:22 UTC | `/mnt/6421-8598/building/FrostyPickaxe` | `df -h /dev/shm; free -m` | `0` | Diagnosed POSIX shared memory file accumulation; cleaned stale files |
+| 2026-11-05 19:24 UTC | `/mnt/6421-8598/building/FrostyPickaxe` | `ninja -C port/out/build/linux-amd64-release rise360` | `0` | Recompiled `rise360` with `CleanStaleShm()` hook in `rise360_app.h` |
+| 2026-11-05 19:25 UTC | `/mnt/6421-8598/building/FrostyPickaxe` | `LD_LIBRARY_PATH=... timeout 15 ./port/out/build/linux-amd64-release/rise360` | `124` | 15s verification run 043: active 6ch 48kHz audio streaming; verified `CleanStaleShm()` active; 0 leaks |
+| 2026-11-05 19:25 UTC | `/mnt/6421-8598/building/FrostyPickaxe` | `LD_LIBRARY_PATH=... timeout 3 ./port/out/build/linux-amd64-release/rise360 --headless` | `124` | Verified startup stale SHM cleanup in run 044 |

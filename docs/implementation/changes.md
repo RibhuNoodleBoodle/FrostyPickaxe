@@ -124,3 +124,18 @@ Last updated: 2026-11-05 (Step 01 repository audit & privacy boundaries)
   - `docs/implementation/status.md`: Updated M5 and E3-input to preparatory pass / blocked on physical controller.
 - **Rationale**: ADR-07 requires inspecting and validating the host SDL3-to-guest XInput translation layer, maintaining honest separation between synthetic verification and physical interactive game acceptance.
 - **Verification / Test**: Ran `python3 -m unittest discover tests`; all 12 unit tests (5 GDFX provisioner + 7 input bridge) passed with exit code 0.
+
+---
+
+## Change Entry: CHG-008 (Step 08 - Audio, Media, Streaming, and Timing Paths)
+- **Date**: 2026-11-06
+- **Author**: Gemini Flash (Implementer)
+- **Files Created / Modified**:
+  - `port/src/rise360_app.h`: Added `CleanStaleShm()` hook invoked in `OnPreSetup()` and `OnShutdown()` to automatically remove stale POSIX shared memory files (`/dev/shm/xenia_memory_*`), preventing resource starvation and SIGBUS faults across repeated launch cycles.
+  - `docs/implementation/08_Audio_Media_and_Streaming.md`: Milestone M6 report covering audio endpoints, media assets, timing mechanisms, and memory stability.
+  - `docs/implementation/status.md`: Updated Milestone M6 and Subgate E3-media to PASS; unlocked Step 09 (Milestone M7).
+  - `docs/implementation/validation.md`: Added Milestone M6 verification entry.
+- **Rationale**: ADR-07 requires robust multi-channel host audio streaming, inventory and streaming of base disc media assets (tiger archives and Bink movies), monotonic timing clocks, and memory stability without resource leaks.
+- **Verification / Test**:
+  1. Recompiled `rise360` with Clang 21 with zero errors.
+  2. Executed repeated GUI test runs (`rise360_040` through `rise360_044`): confirmed continuous audio buffer submission (6-channel 48kHz float PCM) to `'Built-in Audio Analog Stereo'`, 234 graphics pipeline states compiled/restored, and zero leaks in `/dev/shm`.

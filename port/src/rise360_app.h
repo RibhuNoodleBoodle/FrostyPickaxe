@@ -17,11 +17,27 @@ class Rise360App : public rex::ReXApp {
         PPCImageConfig));
   }
 
+  static void CleanStaleShm() {
+    std::error_code ec;
+    if (std::filesystem::exists("/dev/shm", ec)) {
+      for (const auto& entry : std::filesystem::directory_iterator("/dev/shm", ec)) {
+        if (entry.path().filename().string().starts_with("xenia_memory_")) {
+          std::filesystem::remove(entry.path(), ec);
+        }
+      }
+    }
+  }
+
   void OnPreSetup(rex::RuntimeConfig& config) override {
+    CleanStaleShm();
     // Enable Xenos GPU plugin for hardware rendering via Vulkan
     if (config.gpu_plugin.empty()) {
       config.gpu_plugin = "xenos";
     }
+  }
+
+  void OnShutdown() override {
+    CleanStaleShm();
   }
 
   void OnConfigurePaths(rex::PathConfig& paths) override {
