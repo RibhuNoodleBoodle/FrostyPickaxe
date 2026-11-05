@@ -110,3 +110,11 @@ Last updated: 2026-11-05 (Step 01 repository audit & privacy setup)
 | 2026-11-05 19:47 UTC | `/mnt/6421-8598/building/FrostyPickaxe` | `WAYLAND_DISPLAY=wayland-0 DISPLAY=:0 SDL_VIDEO_DRIVER=wayland VK_INSTANCE_LAYERS=VK_LAYER_MESA_screenshot VK_LAYER_MESA_SCREENSHOT_CONFIG="frames=all,output_dir=.../step09_frames,log_type=info" LD_LIBRARY_PATH=... timeout 35 ./port/out/build/linux-amd64-release/rise360` | `124` | 35s verification run 046: captured 765 frames (0-764); 464 active non-black rendered animation frames (301-764, 331 colors); 0 crashes |
 | 2026-11-05 19:47 UTC | `/mnt/6421-8598/building/FrostyPickaxe` | `python3 [PIL frame analysis script]` | `0` | Verified 464 active non-black frames; verified native 1366x768 format 44 presentation |
 | 2026-11-05 19:47 UTC | `/mnt/6421-8598/building/FrostyPickaxe` | `python3 -m unittest discover tests` | `0` | Verified 12/12 unit tests passing in `tests/` |
+
+## Step 10 Execution Log
+
+| Date / UTC | Working Directory | Command | Exit Code | Purpose / Output Summary |
+|---|---|---|---|---|
+| 2026-11-05 19:51 UTC | `/mnt/6421-8598/building/FrostyPickaxe` | `cat /proc/bus/input/devices && ls -la /dev/input` | `0` | Audited host input devices: confirmed 0 physical gamepads connected |
+| 2026-11-05 19:53 UTC | `/mnt/6421-8598/building/FrostyPickaxe` | `REX_MNK_MODE=true LD_LIBRARY_PATH=... timeout 5 ./port/out/build/linux-amd64-release/rise360 --headless` | `124` | Verified `REX_MNK_MODE=true` cvar override applied cleanly (`test_mnk_047.log`) |
+| 2026-11-05 19:54 UTC | `/mnt/6421-8598/building/FrostyPickaxe` | `python3 -m unittest discover tests` | `0` | Confirmed 12/12 unit tests passing (0.001s) |

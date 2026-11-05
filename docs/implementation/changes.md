@@ -159,3 +159,19 @@ Last updated: 2026-11-05 (Step 01 repository audit & privacy boundaries)
   4. Executed 35.0s Wayland launch run 046 with Vulkan and Mesa screenshot layer: captured 765 frames with 464 active non-black rendered animation frames (301-764) displaying 331 unique colors at native 1366x768 resolution.
   5. Ran `python3 -m unittest discover tests`: all 12 unit tests passed in 0.001s.
   6. Memory stability verified: 246 MB tmpfs shm used (7.5 GB free), 8.89 GB RAM available, zero leaks.
+
+---
+
+## Change Entry: CHG-010 (Step 10 - Early Player Progression Audit & Blocker Classification)
+- **Date**: 2026-11-06
+- **Author**: Gemini Flash (Implementer)
+- **Files Created / Modified**:
+  - `docs/implementation/10_Early_Progression_Audit.md`: Step 10 audit report documenting interactive gameplay requirements, input device scan, and BLK-02 classification.
+  - `docs/implementation/status.md`: Updated Milestone M8 and Subgate E5-play to `AUDITED / BLOCKED ON CONTROLLER`.
+  - `docs/implementation/commands.md`: Added Step 10 audit command entries.
+  - `docs/implementation/validation.md`: Updated validation matrix.
+- **Rationale**: ADR-08 and Gemini_00 Section F/H require real advancing gameplay state and substantive player control for early progression acceptance, strictly forbidding simulated idle timers, fake progression flags, or fabricated checkpoint names.
+- **Verification / Test**:
+  1. Audited host devices via `/proc/bus/input/devices`: confirmed zero physical gamepads connected.
+  2. Tested ReXGlue mouse-and-keyboard driver override (`REX_MNK_MODE=true`): confirmed clean initialization in run 047.
+  3. Formally recorded Issue BLK-02 as the blocker for New Game menu selection and early player progression.
