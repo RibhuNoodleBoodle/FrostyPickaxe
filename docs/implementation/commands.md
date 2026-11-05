@@ -70,3 +70,13 @@ Last updated: 2026-11-05 (Step 01 repository audit & privacy setup)
 | 2026-11-05 16:30 UTC | `/mnt/6421-8598/building/FrostyPickaxe` | `ninja -C port/out/build/linux-amd64-release rise360` | `0` | Full parallel build of 207 recompiled translation units and final `rise360` binary linkage with Clang 21 |
 | 2026-11-05 16:32 - 18:56 UTC | `/mnt/6421-8598/building/FrostyPickaxe` | `LD_LIBRARY_PATH=... timeout 10-20 ./port/out/build/linux-amd64-release/rise360 --headless` | `134` (001-034) / `124` (035, 036) | Runtime probe iterations 001 to 035 resolving PPC indirect calls; run 035 ran 20s cleanly with 0 crashes, 0 SIGABRT (exit code 124 timeout) |
 | 2026-11-05 19:02 UTC | `/mnt/6421-8598/building/FrostyPickaxe` | `LD_LIBRARY_PATH=.local/sdk/rexglue-sdk/out/install/linux-amd64/lib timeout 5 ./port/out/build/linux-amd64-release/rise360 --headless` | `124` | Reproducible verification run 036 (5.0s, clean exit code 124) |
+
+## Step 06 Execution Log
+
+| Date / UTC | Working Directory | Command | Exit Code | Purpose / Output Summary |
+|---|---|---|---|---|
+| 2026-11-05 19:05 UTC | `/mnt/6421-8598/building/FrostyPickaxe` | `vulkaninfo --summary` | `0` | Probed physical devices: Intel HD Graphics 620 [8086:5916], Vulkan 1.4.335, Mesa 26.0.8-1ubuntu0.3, Wayland surface support |
+| 2026-11-05 19:06 UTC | `/mnt/6421-8598/building/FrostyPickaxe` | `LD_LIBRARY_PATH=... timeout 5 ./port/out/build/linux-amd64-release/rise360` | `124` | Test run 037 under Wayland GUI: swapchain created at 1366x768 format 44; 219 cached pipelines loaded; 0 crashes |
+| 2026-11-05 19:08 UTC | `/mnt/6421-8598/building/FrostyPickaxe` | `VK_INSTANCE_LAYERS=VK_LAYER_MESA_screenshot VK_LAYER_MESA_SCREENSHOT_CONFIG="frames=all,output_dir=.../.local/rise360/proof,log_type=info" LD_LIBRARY_PATH=... timeout 5 ./port/out/build/linux-amd64-release/rise360` | `124` | Test run 038 with Vulkan screenshot layer: captured frames 0-103; verified 1280x720 and 1366x768 PNG outputs |
+| 2026-11-05 19:09 UTC | `/mnt/6421-8598/building/FrostyPickaxe` | `VK_INSTANCE_LAYERS=VK_LAYER_MESA_screenshot VK_LAYER_MESA_SCREENSHOT_CONFIG="frames=all,output_dir=.../.local/rise360/proof,log_type=info" LD_LIBRARY_PATH=... timeout 30 ./port/out/build/linux-amd64-release/rise360` | `124` | 30s empirical presentation run 039: captured 673 frames (0-672); 147 non-black active animation frames (331 unique colors); 0 crashes |
+| 2026-11-05 19:10 UTC | `/mnt/6421-8598/building/FrostyPickaxe` | `python3 [PIL analysis of proof PNGs]` | `0` | Analyzed color distributions, pixel extrema, and ASCII profiles across all 673 captured presentation frames |

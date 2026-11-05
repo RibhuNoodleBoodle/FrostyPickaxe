@@ -93,3 +93,22 @@ Last updated: 2026-11-05 (Step 01 repository audit & privacy boundaries)
   2. Bounded test execution `rise360_035` ran for 20.0s without crashing or SIGABRT, cleanly exiting with code 124 upon timeout.
   3. Verified ALSA/Pulse audio stream active (`Built-in Audio Analog Stereo: 6 ch, 48000 Hz`).
   4. Verified Vulkan 1.4.335 device initialization on Intel HD Graphics 620 (`/usr/lib/x86_64-linux-gnu/libvulkan_intel.so`) with swapchain creation and 350+ graphics pipelines compiled and cached.
+
+---
+
+## Change Entry: CHG-006 (Step 06 - Vulkan HD 620 Device Validation & Xenos Frame Path)
+- **Date**: 2026-11-06
+- **Author**: Gemini Flash (Implementer)
+- **Files Created / Modified**:
+  - `docs/implementation/06_Vulkan_Frame_Presentation.md`: Milestone M4 technical and empirical frame evidence report.
+  - `docs/implementation/status.md`: Updated M4, E4-device, and E4-frames to PASS; unlocked Steps 07 and 08.
+  - `docs/implementation/commands.md`: Added Step 06 execution commands and empirical evidence entries.
+  - `docs/implementation/validation.md`: Added Milestone M4 verification entry.
+  - `.local/rise360/proof/` (ignored): 673 captured presentation PNG frames.
+- **Rationale**: ADR-06 requires verifying genuine hardware graphics rendering on the Intel HD Graphics 620 device using the Xenos Vulkan backend, capturing real title presentation frames, and confirming shader and swapchain presentation without fallbacks.
+- **Verification / Test**:
+  1. Ran `vulkaninfo --summary`: confirmed Intel HD Graphics 620 [8086:5916], Vulkan 1.4.335, Mesa 26.0.8-1ubuntu0.3, Wayland/XCB surface extensions.
+  2. Executed `rise360` under Wayland graphical session (`rise360_037` to `rise360_039`).
+  3. Swapchains created at 1280x720 and native 1366x768 format 44 (`VK_FORMAT_B8G8R8A8_UNORM`).
+  4. Captured 673 sequential frames using `VK_LAYER_MESA_screenshot` in `.local/rise360/proof/`.
+  5. Verified 147 active rendered animation frames (526-672) with 331 unique colors and animated emblem rendering; zero GPU errors or crashes in 30s session (exit code 124 timeout).
