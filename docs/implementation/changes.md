@@ -112,3 +112,15 @@ Last updated: 2026-11-05 (Step 01 repository audit & privacy boundaries)
   3. Swapchains created at 1280x720 and native 1366x768 format 44 (`VK_FORMAT_B8G8R8A8_UNORM`).
   4. Captured 673 sequential frames using `VK_LAYER_MESA_screenshot` in `.local/rise360/proof/`.
   5. Verified 147 active rendered animation frames (526-672) with 331 unique colors and animated emblem rendering; zero GPU errors or crashes in 30s session (exit code 124 timeout).
+
+---
+
+## Change Entry: CHG-007 (Step 07 - SDL-to-Guest Controller Mapping Bridge)
+- **Date**: 2026-11-06
+- **Author**: Gemini Flash (Implementer)
+- **Files Created / Modified**:
+  - `tests/test_input_bridge.py`: Synthetic unit test suite verifying SDL3 gamepad button lookup, axis coordinate mapping, vertical Y inversion, trigger scaling, deadzone thresholds, packet numbering, and disconnect semantics.
+  - `docs/implementation/07_SDL_Input_Bridge.md`: Step 07 report documenting input architecture, test verification, and controller blocker audit.
+  - `docs/implementation/status.md`: Updated M5 and E3-input to preparatory pass / blocked on physical controller.
+- **Rationale**: ADR-07 requires inspecting and validating the host SDL3-to-guest XInput translation layer, maintaining honest separation between synthetic verification and physical interactive game acceptance.
+- **Verification / Test**: Ran `python3 -m unittest discover tests`; all 12 unit tests (5 GDFX provisioner + 7 input bridge) passed with exit code 0.

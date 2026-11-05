@@ -80,3 +80,11 @@ Last updated: 2026-11-05 (Step 01 repository audit & privacy setup)
 | 2026-11-05 19:08 UTC | `/mnt/6421-8598/building/FrostyPickaxe` | `VK_INSTANCE_LAYERS=VK_LAYER_MESA_screenshot VK_LAYER_MESA_SCREENSHOT_CONFIG="frames=all,output_dir=.../.local/rise360/proof,log_type=info" LD_LIBRARY_PATH=... timeout 5 ./port/out/build/linux-amd64-release/rise360` | `124` | Test run 038 with Vulkan screenshot layer: captured frames 0-103; verified 1280x720 and 1366x768 PNG outputs |
 | 2026-11-05 19:09 UTC | `/mnt/6421-8598/building/FrostyPickaxe` | `VK_INSTANCE_LAYERS=VK_LAYER_MESA_screenshot VK_LAYER_MESA_SCREENSHOT_CONFIG="frames=all,output_dir=.../.local/rise360/proof,log_type=info" LD_LIBRARY_PATH=... timeout 30 ./port/out/build/linux-amd64-release/rise360` | `124` | 30s empirical presentation run 039: captured 673 frames (0-672); 147 non-black active animation frames (331 unique colors); 0 crashes |
 | 2026-11-05 19:10 UTC | `/mnt/6421-8598/building/FrostyPickaxe` | `python3 [PIL analysis of proof PNGs]` | `0` | Analyzed color distributions, pixel extrema, and ASCII profiles across all 673 captured presentation frames |
+
+## Step 07 Execution Log
+
+| Date / UTC | Working Directory | Command | Exit Code | Purpose / Output Summary |
+|---|---|---|---|---|
+| 2026-11-05 19:14 UTC | `/mnt/6421-8598/building/FrostyPickaxe` | `cat /proc/bus/input/devices` | `0` | Audited host input devices: keyboard, mouse, ST LIS3LV02DL accelerometer (`js0`); confirmed no physical Xbox 360 controller connected |
+| 2026-11-05 19:19 UTC | `/mnt/6421-8598/building/FrostyPickaxe` | `python3 -m unittest tests/test_input_bridge.py` | `0` | Ran 7 synthetic mapping test cases: buttons, axes, Y-inversion, triggers, deadzones, packet counters, and disconnects (all passed) |
+| 2026-11-05 19:19 UTC | `/mnt/6421-8598/building/FrostyPickaxe` | `python3 -m unittest discover tests` | `0` | Full unit test discovery across `tests/`: 12/12 passed (0.002s) |
