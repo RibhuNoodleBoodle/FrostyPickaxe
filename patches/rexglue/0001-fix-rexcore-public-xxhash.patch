@@ -14,3 +14,15 @@ index 1ddafd0..2ba1738 100644
  )
  
  if(REXGLUE_USE_D3D12)
+diff --git a/tests/unit/CMakeLists.txt b/tests/unit/CMakeLists.txt
+index 7bd264b..e8689f2 100644
+--- a/tests/unit/CMakeLists.txt
++++ b/tests/unit/CMakeLists.txt
+@@ -29,6 +29,7 @@ target_sources(unit_tests PRIVATE
+ target_include_directories(unit_tests PRIVATE
+     ${PROJECT_SOURCE_DIR}/include
+     ${PROJECT_SOURCE_DIR}/src
++    ${PROJECT_SOURCE_DIR}/thirdparty/xxHash
+     ${CMAKE_CURRENT_SOURCE_DIR}
+ )
+ 
