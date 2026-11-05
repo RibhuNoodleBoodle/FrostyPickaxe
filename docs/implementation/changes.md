@@ -76,3 +76,20 @@ Last updated: 2026-11-05 (Step 01 repository audit & privacy boundaries)
   5. Verified `git status`: confirmed `port/generated/` and `port/rise360_manifest.toml` remain completely untracked and ignored.
 
 
+
+---
+
+## Change Entry: CHG-005 (Step 05 - Runtime, Guest Services, VFS, and Indirect Dispatch Resolution)
+- **Date**: 2026-11-06
+- **Author**: Gemini Flash (Implementer)
+- **Files Modified / Created**:
+  - `port/CMakeLists.txt`: Configured `rexglue_setup_target(rise360 GPU_PLUGINS xenos)`.
+  - `port/src/rise360_app.h`: Overrode `OnPreSetup()` to set default `config.gpu_plugin = "xenos"`; overrode `OnConfigurePaths()` to map `.local/rise360/game-base` to `game_data_root`, user/cache roots, and explicitly clear `update_data_root` per ADR-02 base disc isolation.
+  - `port/rise360_manifest.toml` (ignored): Added 48 missing indirect PowerPC call dispatch entrypoints (vtable `this`-adjuster thunks, interface dispatch thunks, and leaf blr utility routines).
+  - `docs/implementation/05_Runtime_Guest_Services_and_VFS.md`: Milestone M3 technical and verification report.
+- **Rationale**: ADR-05 / ADR-06 requires initializing ReXApp lifecycle, mounting the single-disc virtual filesystem, spawning guest multi-core threads, attaching native ALSA/Pulse audio, and resolving all runtime indirect function calls on Intel HD Graphics 620 via Vulkan.
+- **Verification / Test**:
+  1. Recompiled 207 translation units and linked `rise360` with Clang 21 without errors.
+  2. Bounded test execution `rise360_035` ran for 20.0s without crashing or SIGABRT, cleanly exiting with code 124 upon timeout.
+  3. Verified ALSA/Pulse audio stream active (`Built-in Audio Analog Stereo: 6 ch, 48000 Hz`).
+  4. Verified Vulkan 1.4.335 device initialization on Intel HD Graphics 620 (`/usr/lib/x86_64-linux-gnu/libvulkan_intel.so`) with swapchain creation and 350+ graphics pipelines compiled and cached.

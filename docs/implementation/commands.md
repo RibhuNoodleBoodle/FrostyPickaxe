@@ -62,3 +62,11 @@ Last updated: 2026-11-05 (Step 01 repository audit & privacy setup)
 | 2026-11-05 16:16 UTC | `/mnt/6421-8598/building/FrostyPickaxe` | `ninja -C port/out/build/linux-amd64-release CMakeFiles/rise360.dir/src/main.cpp.o` | `0` | Clean test compilation of `main.cpp.o` |
 | 2026-11-05 16:16 UTC | `/mnt/6421-8598/building/FrostyPickaxe` | `ninja -C port/out/build/linux-amd64-release CMakeFiles/rise360_recomp.dir/generated/default/rise360_recomp.0.cpp.o` | `0` | Clean test compilation of recompiled PCH and translation unit 0 |
 
+
+## Step 05 Execution Log
+
+| Date / UTC | Working Directory | Command | Exit Code | Purpose / Output Summary |
+|---|---|---|---|---|
+| 2026-11-05 16:30 UTC | `/mnt/6421-8598/building/FrostyPickaxe` | `ninja -C port/out/build/linux-amd64-release rise360` | `0` | Full parallel build of 207 recompiled translation units and final `rise360` binary linkage with Clang 21 |
+| 2026-11-05 16:32 - 18:56 UTC | `/mnt/6421-8598/building/FrostyPickaxe` | `LD_LIBRARY_PATH=... timeout 10-20 ./port/out/build/linux-amd64-release/rise360 --headless` | `134` (001-034) / `124` (035, 036) | Runtime probe iterations 001 to 035 resolving PPC indirect calls; run 035 ran 20s cleanly with 0 crashes, 0 SIGABRT (exit code 124 timeout) |
+| 2026-11-05 19:02 UTC | `/mnt/6421-8598/building/FrostyPickaxe` | `LD_LIBRARY_PATH=.local/sdk/rexglue-sdk/out/install/linux-amd64/lib timeout 5 ./port/out/build/linux-amd64-release/rise360 --headless` | `124` | Reproducible verification run 036 (5.0s, clean exit code 124) |

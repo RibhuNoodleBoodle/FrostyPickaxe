@@ -21,4 +21,4 @@ else()
     add_executable(rise360 ${RISE360_SOURCES})
 endif()
 
-rexglue_setup_target(rise360)
+rexglue_setup_target(rise360 GPU_PLUGINS xenos)
