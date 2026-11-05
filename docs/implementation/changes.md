@@ -139,3 +139,23 @@ Last updated: 2026-11-05 (Step 01 repository audit & privacy boundaries)
 - **Verification / Test**:
   1. Recompiled `rise360` with Clang 21 with zero errors.
   2. Executed repeated GUI test runs (`rise360_040` through `rise360_044`): confirmed continuous audio buffer submission (6-channel 48kHz float PCM) to `'Built-in Audio Analog Stereo'`, 234 graphics pipeline states compiled/restored, and zero leaks in `/dev/shm`.
+
+---
+
+## Change Entry: CHG-009 (Step 09 - First Clean Authentic Game-Specific Build and Launch Check)
+- **Date**: 2026-11-06
+- **Author**: Gemini Flash (Implementer)
+- **Files Created / Modified**:
+  - `docs/implementation/09_Milestone_Build_and_Launch.md`: Milestone M7 technical report, compilation provenance, SHA-256 hash, and empirical launch verification.
+  - `docs/implementation/status.md`: Updated Milestone M7 and Subgate E5-build to PASS; unlocked Step 10 (Milestone M8).
+  - `docs/implementation/commands.md`: Recorded build cleaning, compilation, hash verification, and launch commands.
+  - `docs/implementation/validation.md`: Added Milestone M7 verification entry.
+  - `.local/rise360/proof/step09_frames/` (ignored): 765 captured presentation PNG frames.
+- **Rationale**: ADR-08 and Step 09 require independent verification of a completely clean build from source/manifest, deterministic binary identity, and empirical launch verification with live frame captures, distinguishing compile and launch statuses from interactive gameplay.
+- **Verification / Test**:
+  1. Cleaned 424 build artifacts with `ninja -C port/out/build/linux-amd64-release -t clean rise360`.
+  2. Rebuilt all 207 recompiled translation units and linked `rise360` with Clang 21 in 171.2s (exit code 0).
+  3. Binary identity verified: 115 MB, SHA-256 `dd6ca62cdb61da96804e8a9ca27041c78c52378cf2f4a48af0f233ee7bcc219b`.
+  4. Executed 35.0s Wayland launch run 046 with Vulkan and Mesa screenshot layer: captured 765 frames with 464 active non-black rendered animation frames (301-764) displaying 331 unique colors at native 1366x768 resolution.
+  5. Ran `python3 -m unittest discover tests`: all 12 unit tests passed in 0.001s.
+  6. Memory stability verified: 246 MB tmpfs shm used (7.5 GB free), 8.89 GB RAM available, zero leaks.

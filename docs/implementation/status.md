@@ -1,6 +1,6 @@
 # FrostyPickaxe Implementation Status Ledger
 
-Last updated: 2026-11-06 (Step 06 / Milestone M4 completed)
+Last updated: 2026-11-06 (Step 09 / Milestone M7 completed)
 Architect: ChatGPT Astra (ADR-01 through ADR-09)
 Implementer: Gemini Flash
 
@@ -17,8 +17,8 @@ Implementer: Gemini Flash
 | **M4** | Step 06 | Vulkan HD 620 device validation & Xenos frame path | **PASS** | Step 05 (M3 PASS) | Wayland presentation active at native 1366x768; 673 frames captured via `VK_LAYER_MESA_screenshot`; 147 active non-black animated title frames verified (331 unique colors); 350+ pipelines compiled/cached on Intel HD 620. See `docs/implementation/06_Vulkan_Frame_Presentation.md`. |
 | **M5** | Step 07 | SDL-to-guest controller mapping and semantics | **PREPARATION PASS / BLOCKED** | Step 05 & Step 06 (M4 PASS) | Input subsystem initialization verified; synthetic mapping test suite in `tests/test_input_bridge.py` passed (7/7); full interactive acceptance blocked on physical Xbox 360 controller attachment (Issue BLK-02). See `docs/implementation/07_SDL_Input_Bridge.md`. |
 | **M6** | Step 08 | Audio, media, streaming and scene loading | **PASS** | Step 05 & Step 06 (M4 PASS) | Audio streaming verified (6ch 48kHz float PCM on ALSA/Pulse); base disc tiger archives and movies audited; timing paths and shared memory stability verified. See `docs/implementation/08_Audio_Media_and_Streaming.md`. |
-| **M7** | Step 09 | First clean authentic game-specific build and launch | **READY** | M2 through M6 applicable results | Ready for Milestone M7 fresh clean rebuild and launch verification. |
-| **M8** | Step 10 | New Game and early player progression | **BLOCKED** | Step 09 (M7 PASS) | Substantive control & state advancing. |
+| **M7** | Step 09 | First clean authentic game-specific build and launch | **PASS** | M2 through M6 applicable results | Clean target rebuild (424 files cleaned); all 207 recompiled TUs compiled with Clang 21; `rise360` linked (115 MB, SHA-256 `dd6ca62c...`); 35s Wayland launch captured 765 frames with 464 active non-black rendered animation frames (331 colors); 12/12 unit tests pass; 0 memory leaks. See `docs/implementation/09_Milestone_Build_and_Launch.md`. |
+| **M8** | Step 10 | New Game and early player progression | **AUDIT READY / BLOCKED** | Step 09 (M7 PASS) | Ready for Step 10 audit; progression gated on physical gamepad attachment per BLK-02. |
 | **M9** | Step 11 | Ten-minute gameplay acceptance (Gemini_90 protocol) | **BLOCKED** | Step 10 (M8 PASS) | Continuous interactive >=600s session. |
 | **M10** | Step 12 | Final clean reproduction on HD 620, measurements & publication audit | **BLOCKED** | Step 11 (M9 PASS) | Fresh rebuild, repeat gameplay, performance data. |
 | **M11** | Step 99 | Scoped repository push to origin/main | **BLOCKED** | All core gates M0–M10 PASSED | Final push gate. |
@@ -39,8 +39,8 @@ Implementer: Gemini Flash
 | **E4-frames** | Step 06 | Title-generated frames, reference comparison, shader/EDRAM diagnosis | **PASS** | 673 captured presentation frames (`.local/rise360/proof/`); 147 active rendered animation frames (526-672); 331 unique colors; swapchain 1366x768 on Intel HD 620 (`docs/implementation/06_Vulkan_Frame_Presentation.md`). |
 | **E3-input** | Step 07 | SDL controller bridge, guest XInput state, focus/hotplug | **PREP PASS / BLOCKED** | Synthetic unit test suite `tests/test_input_bridge.py` passed (7/7); blocked on physical controller for end-to-end acceptance (BLK-02). |
 | **E3-media** | Step 08 | Middleware/codec discovery, audio/video streams, loading stability | **PASS** | 6-channel 48kHz audio streaming; base tiger archives and Bink movie paths verified; shared memory leak resolved via `CleanStaleShm()`. |
-| **E5-build** | Step 09 | Fresh clean game-specific compilation, linkage, and launch check | **READY** | Ready to proceed with Step 09 milestone build |
-| **E5-play** | Step 10 | New Game sequence, controls, scene transitions | **BLOCKED** | Dependent on E5-build |
+| **E5-build** | Step 09 | Fresh clean game-specific compilation, linkage, and launch check | **PASS** | Fresh clean rebuild of `rise360` (115 MB, SHA-256 `dd6ca62c...`); 35s Wayland launch run 046 captured 765 frames with 464 active non-black rendered animation frames; 12/12 unit tests pass (`docs/implementation/09_Milestone_Build_and_Launch.md`). |
+| **E5-play** | Step 10 | New Game sequence, controls, scene transitions | **AUDIT READY / BLOCKED** | Dependent on physical gamepad for progression (BLK-02) |
 | **E6-time** | Step 11 | Gemini_90 continuous 10-minute session on HD 620 | **BLOCKED** | Dependent on E5-play |
 | **E6-repro** | Step 12 | Clean final candidate rebuild, measurement, content audit | **BLOCKED** | Dependent on E6-time |
 | **E7-push** | Step 99 | Authenticated scoped push to authorized remote | **BLOCKED** | Core gates M0-M10 must pass first |
@@ -65,5 +65,7 @@ Step 01 (PASS)
                                                                               ├──> Step 07: SDL Input Bridge (E3-input) [PREP PASS / BLOCKED]
                                                                               └──> Step 08: Audio/Media Streaming (E3-media) [PASS]
                                                                                       │
-                                                                                      └──> Step 09: First Milestone Build (E5-build) [READY]
+                                                                                      └──> Step 09: First Milestone Build (E5-build) [PASS]
+                                                                                              │
+                                                                                              └──> Step 10: New Game Progression (E5-play) [AUDIT READY / BLOCKED]
 ```

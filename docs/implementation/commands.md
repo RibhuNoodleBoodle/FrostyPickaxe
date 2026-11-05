@@ -98,3 +98,15 @@ Last updated: 2026-11-05 (Step 01 repository audit & privacy setup)
 | 2026-11-05 19:24 UTC | `/mnt/6421-8598/building/FrostyPickaxe` | `ninja -C port/out/build/linux-amd64-release rise360` | `0` | Recompiled `rise360` with `CleanStaleShm()` hook in `rise360_app.h` |
 | 2026-11-05 19:25 UTC | `/mnt/6421-8598/building/FrostyPickaxe` | `LD_LIBRARY_PATH=... timeout 15 ./port/out/build/linux-amd64-release/rise360` | `124` | 15s verification run 043: active 6ch 48kHz audio streaming; verified `CleanStaleShm()` active; 0 leaks |
 | 2026-11-05 19:25 UTC | `/mnt/6421-8598/building/FrostyPickaxe` | `LD_LIBRARY_PATH=... timeout 3 ./port/out/build/linux-amd64-release/rise360 --headless` | `124` | Verified startup stale SHM cleanup in run 044 |
+
+## Step 09 Execution Log
+
+| Date / UTC | Working Directory | Command | Exit Code | Purpose / Output Summary |
+|---|---|---|---|---|
+| 2026-11-05 19:28 UTC | `/mnt/6421-8598/building/FrostyPickaxe` | `ninja -C port/out/build/linux-amd64-release -t clean rise360` | `0` | Cleaned 424 build artifacts for clean milestone compilation |
+| 2026-11-05 19:44 UTC | `/mnt/6421-8598/building/FrostyPickaxe` | `ninja -C port/out/build/linux-amd64-release rise360 -j4` | `0` | Clean build of all 207 recompiled translation units and linkage of `rise360` binary (171.2s) |
+| 2026-11-05 19:45 UTC | `/mnt/6421-8598/building/FrostyPickaxe` | `sha256sum port/out/build/linux-amd64-release/rise360` | `0` | `dd6ca62cdb61da96804e8a9ca27041c78c52378cf2f4a48af0f233ee7bcc219b` |
+| 2026-11-05 19:45 UTC | `/mnt/6421-8598/building/FrostyPickaxe` | `WAYLAND_DISPLAY=wayland-0 DISPLAY=:0 SDL_VIDEO_DRIVER=wayland VK_INSTANCE_LAYERS=VK_LAYER_MESA_screenshot VK_LAYER_MESA_SCREENSHOT_CONFIG="frames=all,output_dir=.../step09_frames,log_type=info" LD_LIBRARY_PATH=... timeout 10 ./port/out/build/linux-amd64-release/rise360` | `124` | 10s initial launch run 045: captured 266 frames during asset loading phase |
+| 2026-11-05 19:47 UTC | `/mnt/6421-8598/building/FrostyPickaxe` | `WAYLAND_DISPLAY=wayland-0 DISPLAY=:0 SDL_VIDEO_DRIVER=wayland VK_INSTANCE_LAYERS=VK_LAYER_MESA_screenshot VK_LAYER_MESA_SCREENSHOT_CONFIG="frames=all,output_dir=.../step09_frames,log_type=info" LD_LIBRARY_PATH=... timeout 35 ./port/out/build/linux-amd64-release/rise360` | `124` | 35s verification run 046: captured 765 frames (0-764); 464 active non-black rendered animation frames (301-764, 331 colors); 0 crashes |
+| 2026-11-05 19:47 UTC | `/mnt/6421-8598/building/FrostyPickaxe` | `python3 [PIL frame analysis script]` | `0` | Verified 464 active non-black frames; verified native 1366x768 format 44 presentation |
+| 2026-11-05 19:47 UTC | `/mnt/6421-8598/building/FrostyPickaxe` | `python3 -m unittest discover tests` | `0` | Verified 12/12 unit tests passing in `tests/` |

@@ -1,6 +1,6 @@
 # Validation Matrix & Evidence Mapping
 
-Last updated: 2026-11-05 (Step 01 audit)
+Last updated: 2026-11-06 (Step 09 / Milestone M7 clean build & launch verified)
 
 ---
 
@@ -22,4 +22,5 @@ Last updated: 2026-11-05 (Step 01 audit)
 | Vulkan HD 620 Frame Presentation (M4) | ADR-06 | **VERIFIED** | Wayland frame presentation: 673 captured presentation frames (`.local/rise360/proof/`); 147 active animation frames (526-672); 331 unique colors; 1366x768 swapchain on Intel HD 620 | `docs/implementation/06_Vulkan_Frame_Presentation.md`, `status.md` |
 | SDL-to-Guest Input Bridge (Step 07) | ADR-07 | **PREP VERIFIED** | Synthetic test suite `tests/test_input_bridge.py` passed (7/7); full interactive acceptance blocked on physical controller (BLK-02) | `docs/implementation/07_SDL_Input_Bridge.md`, `status.md` |
 | Audio, Media & Timing Paths (M6) | ADR-07 | **VERIFIED** | Active 6ch 48kHz audio streaming; base tiger archives and 71 Bink videos inventoried; high-res monotonic clock; shared memory leak resolved | `docs/implementation/08_Audio_Media_and_Streaming.md`, `status.md` |
-| Authentic 10-Minute Gameplay Acceptance | ADR-08 / Gemini_90 | **NOT TESTED** | Blocked on Steps 09-10 | Dependent on future milestones |
+| Clean Build & Native Launch Check (M7) | ADR-08 / Step 09 | **VERIFIED** | Full clean target rebuild (424 files cleaned); all 207 TUs compiled; `rise360` linked (115 MB, SHA-256 `dd6ca62c...`); 35s Wayland launch run 046 captured 765 frames with 464 active non-black rendered animation frames (331 colors); 12/12 unit tests pass | `docs/implementation/09_Milestone_Build_and_Launch.md`, `status.md` |
+| Authentic 10-Minute Gameplay Acceptance | ADR-08 / Gemini_90 | **NOT TESTED** | Blocked on Steps 10-11 | Dependent on physical gamepad for progression |
