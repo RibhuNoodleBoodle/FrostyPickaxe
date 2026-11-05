@@ -1,0 +1,24 @@
+ARCHITECTURE DECISION STATUS — REVISION 2
+This retained filename is a navigation aid; it no longer requests another architect.
+Read Gemini_00_Read_First.txt and its full anti-cheating policy.
+
+The user appointed Astra as architect. The current design is supplied in:
+docs/architecture/01_System_Architecture_ADR.md
+docs/architecture/02_Modular_Responsibility_Map.md
+docs/architecture/03_Discovery_Plan_and_Gates.md
+docs/architecture/04_Worker_Task_Decomposition.md
+
+Architecture role/ownership gate: RESOLVED by user delegation and Astra-authored design.
+SDK pin, Linux-first host, base-only initial input, project/private layout, subsystem boundaries and functional acceptance policy: SELECTED in ADR-01 through ADR-09.
+No separate Argon approval needed. These decisions are not claimed as separately user-reviewed or technically tested.
+
+Facts still requiring Flash evidence:
+- Exact base integrity and lawful compatible provisioning; update applicability separately.
+- Actual recursive dependency/SDL IDs and successful compiler/SDK baseline.
+- Critical function/import/VMX128/dispatch coverage and guest-service semantics.
+- Actual display access, HD 620 Vulkan capabilities and genuine rendering correctness.
+- Physical controller, required media/streaming and real early progression.
+- Observed >=600 eligible seconds, clean reproduction and measurements.
+- Safe publication file set and actual authorized/authenticated remote destination.
+
+These block only dependent gates per architecture document 03. Start Step_01, then execute source and SDK branches as ready. Do not ask the user to provide an architecture that Astra has now written. Escalate only a concrete unavailable prerequisite, infeasible core constraint or material product/rights change.

@@ -1,0 +1,14 @@
+ASTRA ARCHITECTURE AND PROMPT REVIEW — REVISION 2
+Documentation review only; no game technical milestone PASS. Gemini_00 full anti-cheating/report contract applies.
+
+- User architect delegation implemented: four actual docs/architecture files, nine selected ADRs, module ownership/contracts, evidence experiments and work decomposition. No separate Argon approval gate.
+- Twelve numbered implementation steps retained, each with all fourteen required sections, source references, exact selected path scope, tests/stops and report template.
+- Selected initial Linux x86-64/base-disc/ReXGlue SHA/HD 620 Vulkan architecture, private/original separation and SDK reuse decisions are explicit. Windows untested and Android deferred.
+- Base-only choice is overt; TU compatibility remains independently unresolved, never forced or falsely passed. Update becomes a progression blocker if required by evidence.
+- SDK setup depends on safe repo audit, not input/update/display success. Game generation joins verified base input and SDK baseline. Integration preparations can continue independently; full end-to-end gates remain mandatory.
+- Pinned manifest CLI and runtime-loaded GPU plugin identified from source; older moving-wiki options are not copied as commands. Local codegen/runtime/SDL/dependency contracts must still be inspected by Flash.
+- No invented selected-submodule SHA, compiler success, runtime coverage, device capabilities, scene names or FPS. Exact command recipes labeled future/unexecuted; actual game targets derived from scaffold.
+- First authentic build, early interaction, >=600-second observed gameplay and clean HD 620 final repeat remain distinct. Numeric research aspirations do not become an artificial approval gate; severe unresponsiveness/fake frames still fail.
+- All private data excluded before creation; original inputs immutable. Generated derivatives and captures not published; exact permissions/rights and real remote verification still gate final publication.
+- Existing README/research/Argon files preserved by hash; only architecture documentation and prompt files modified by Astra. No program source/build/install/run/commit/push performed.
+- Complete manifest: 22 UTF-8 prompt/support text files plus 4 architecture Markdown documents, 26 documents total. Index lists each purpose/dependency/allowed work/gate/stop. Structural and stale-gate checks run after revision.

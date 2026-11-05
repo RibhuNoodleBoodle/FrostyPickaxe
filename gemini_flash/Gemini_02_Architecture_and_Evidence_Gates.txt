@@ -1,0 +1,38 @@
+ARCHITECTURE AND EVIDENCE GATES — REVISION 2
+Read Gemini_00_Read_First.txt; its anti-cheating and report contract remain binding. The user appointed Astra as architect. Architecture is supplied; no external Argon approval is pending. Technical readiness is evaluated per task, not asserted globally.
+
+READ THE ACTUAL DESIGN
+A1 docs/architecture/01_System_Architecture_ADR.md
+A2 docs/architecture/02_Modular_Responsibility_Map.md
+A3 docs/architecture/03_Discovery_Plan_and_Gates.md
+A4 docs/architecture/04_Worker_Task_Decomposition.md
+S1 gemini_flash/Gemini_03_Pinned_SDK_and_Commands.txt
+R1-R6/E1 are defined in Gemini_00. Existing Argon reports are research inputs, not current decision authority. The latest user delegation supersedes the old wait-for-Argon gate.
+
+SELECTED DECISIONS
+ADR-01 Linux x86-64 initially, genuine static Xbox 360 game execution; HD 620 Vulkan acceptance; Windows untested, Android deferred.
+ADR-02 explicitly target supplied base-disc build first; revalidate it; quarantine update. G1-base and G1-update are separate. A required update discovered at runtime blocks that path until verified.
+ADR-03 immutable SDK baseline and recursive gitlinks; current chosen-source interfaces control over moving wiki. Actual submodule/compiler/SDL verification is Flash work.
+ADR-04 exact original/private paths and exclusions before generation.
+ADR-05 thin SDK app/runtime integration, strict CPU translation and genuine guest services.
+ADR-06 existing Xenos Vulkan plugin, actual HD 620 checks and captured frames.
+ADR-07 actual SDL/guest controls and necessary media/streaming.
+ADR-08 first build, progression, >=600-second gameplay and measured behavior separately evidenced; no invented FPS.
+ADR-09 final safe publication only after all core technical gates.
+
+MAPPING AND TRUE DEPENDENCIES
+Step_01 -> M0 audit/privacy setup; can complete while future probes remain BLOCKED.
+Step_02 -> M0/G1-base source provisioning, with separate update investigation.
+Step_03 -> M1 SDK-only baseline; depends on 01, not on 02 or working display.
+Step_04 -> M2 strict game-specific codegen; depends on G1-base and M1.
+Step_05 -> M3 runtime/services/content; depends on 04.
+Steps_06/07/08 -> M4 Vulkan, M5 controls, M6 media/streaming; depend on 05 for real integration, may prepare independently. Device preflight may begin after 01. Full visual/interactive acceptance requires functioning relevant branches.
+Step_09 -> M7 first independent clean authentic game build/launch after applicable integration results. Earlier incremental compile/launch is allowed for diagnosis.
+Step_10 -> M8 New Game / early play.
+Step_11 with Gemini_90 -> M9 genuine >=600 eligible seconds.
+Step_12 -> M10 clean final reproduction, HD 620 repeat, measurements and content audit.
+Gemini_99 -> M11 scoped commit/push, all applicable core gates passed.
+Old research G0-G5 and M1-M6 names must be explicitly mapped, never conflated with current M0-M11. Android G5 is deferred.
+
+STOP RULES
+No invented passing tests, APIs, source identities, device support or publish rights. Missing legal input tooling blocks game generation, not public SDK build. Failed display access blocks graphics acceptance, not CPU analysis. Unproved update compatibility blocks update selection, not selected base work. Missing tester/recording blocks gameplay acceptance and final push. An unsupported critical CPU/GPU/runtime requirement stops its branch with evidence; routine engineering corrections may proceed under active scope. Preserve user modifications. Changes invalidate affected downstream proof. No giant approval gate replaces these concrete checks.

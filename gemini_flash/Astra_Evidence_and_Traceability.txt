@@ -1,0 +1,22 @@
+REVISION-2 AUTHORITY AND EVIDENCE ADDENDUM — 2026-11-05
+The body below records the initial authoring audit and is HISTORICAL, including its then-absent architecture and unselected SDK. It is not the current task gate. The user subsequently appointed Astra as architect. Current design: docs/architecture/01_System_Architecture_ADR.md, 02_Modular_Responsibility_Map.md, 03_Discovery_Plan_and_Gates.md and 04_Worker_Task_Decomposition.md. No Argon architecture was found; Astra supplied the design under user delegation instead. Do not wait for Argon approval.
+ADR-03 now deliberately selects c94f5ebdcb3c9d1a460ca48e04f9758448f8d518 as integration baseline, without claiming installation, compatibility or latest status. ADR-02 explicitly chooses base-only initial work, leaving TU applicability a separate gate. Source register and future recipes: Gemini_03_Pinned_SDK_and_Commands.txt; fetched pinned CMake/presets/gitmodules, runtime/ReXApp headers, graphics and CLI/codegen build files, init/codegen implementation and manifest template. CLI manifest/plugin contracts differ from moving wiki examples; selected source controls. Full source checkout and recursive gitlinks still to be inspected by Flash. Web tree API failed and shell urllib GitHub query reported DNS resolution failure; no dependencies were downloaded or built.
+Current traceability: ADR-01 host/target -> all steps; ADR-02 source -> 02/04 and every run identity; ADR-03 SDK -> 03/04/S1; ADR-04 ownership -> 01 and every mutation; ADR-05 runtime -> 04/05; ADR-06 GPU -> 06/09-12; ADR-07 input/media -> 07/08/10-12; ADR-08 proof -> 09/10/11/90/12; ADR-09 publication -> 12/99. A3 defines actual DAG and scoped blockers; no blanket architecture gate. Current index enumerates updated pack plus architecture docs. No game code/build/runtime/commit/push performed by Astra.
+
+HISTORICAL INITIAL AUDIT FOLLOWS (not current architecture status)
+ASTRA READ-ONLY AUDIT AND REQUIREMENT CURRENT TRACEABILITY
+Use the revision-2 addendum, Gemini_00 reference map, architecture ADRs and current index. R0 anti-cheating, authentic gameplay, reporting and final publication rules remain binding. Latest user architect delegation supersedes the old role/absent-architecture gate. R4 risks map to the scoped experiments in docs/architecture/03_Discovery_Plan_and_Gates.md. G1-base/G1-update are separately tracked; numeric performance aspirations are not fabricated results. Existing research hashes below remain unchanged. No Argon architecture exists; current architecture is Astra-authored, not attributed to Argon.
+
+DOCUMENT SNAPSHOT HASHES
+README.md | SHA-256 c793b25566e5bdb1c0b9cf93355bf00c5d119271922a73cc4c0066c2e44c81fa
+.gitignore | SHA-256 68641630301c12c4faa831ce3d4b2a796a06266f32e9858ea8aef63dec816629
+Gemini_Argon_Medium_Rise_360_Feasibility_Researcher.txt | SHA-256 dcad89b2c41362e0c07efd716eb2895cb28fb43a0bd6321cc75fe7c7bbc842e9
+Astra_Rise_360_to_Gemini_Flash_Master_Prompt.txt | SHA-256 9c3ce66070d5bed4f87fc91da137b42067e6c6b535e7074d99758cf6c1bc2a44
+docs/research/00_Repository_State.md | SHA-256 4f5ead45344d138e905974f689b3f1b95a9efccb17b4b4f0e6873d2d745464dd
+docs/research/01_Feasibility_Report.md | SHA-256 286ac1a12891777d0339e5de5badc58dd722d4dbc8733e0f1740803175f5212d
+docs/research/02_Risks_Unknowns_and_Gates.md | SHA-256 c149080ec4ce83cad3153e7412eb60b4910cbed3b737032420a39ca6f3498f2b
+docs/research/03_Sources_and_Evidence.md | SHA-256 b5f475dd449ca1a9dbc685a1fb8f225ee4dfd8b28d9d96853b48256cf57d0825
+gemini_argon/Gemini_Argon_01_Personality.txt | SHA-256 4cf15cd21590573e0288f32baa3cb3e85b965bd64bcb026adda75de4acd0320a
+gemini_argon/Gemini_Argon_02_Scope.txt | SHA-256 35482923b67ecf93af035f315205a6ee2f19d7e58d06c4568b25e6e927fd8327
+gemini_argon/Gemini_Argon_03_Skills.txt | SHA-256 7e0fe155e3be9c74553297d043cead7c458bbceec69a65298c220e9fbbed5623
+gemini_argon/Gemini_Argon_04_Architecture_Handoff.txt | SHA-256 af8faae55027c5d0cc0e9191e09d27c15fc9b0b83b23e839586e488efd50f4c2

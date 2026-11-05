@@ -1,0 +1,73 @@
+PINNED SDK CONTRACTS AND FUTURE COMMAND RECIPES — REVISION 2
+Read Gemini_00_Read_First.txt and its full anti-cheating/report contract, plus docs/architecture/01_System_Architecture_ADR.md. These commands are architect-derived instructions for Flash, NOT executed results. All paths below are selected future local paths. Never run a command before its prerequisites or report it as tested by Astra.
+
+BASELINE
+ReXGlue c94f5ebdcb3c9d1a460ca48e04f9758448f8d518; official https://github.com/rexglue/rexglue-sdk. A deliberate initial integration baseline, not a latest/stable/compatible claim. Keep recursive gitlink revisions; record actual SDL SHA/version and every dependency. No --remote submodule updates. Unknown compiler/driver/license details remain experiment results to obtain.
+
+PINNED SOURCE REGISTER (retrieved 2026-11-05)
+S-BUILD https://raw.githubusercontent.com/rexglue/rexglue-sdk/c94f5ebdcb3c9d1a460ca48e04f9758448f8d518/CMakeLists.txt
+Observed CMake >=3.25, C++23, Clang >=18, 64-bit host requirement, tests opt-in, explicit Vulkan/D3D12 options. Selected initial Linux host uses Vulkan. Actual system compiler absent from plain clang names in E1; inspect versioned executables and availability. Freeze the actual successful compiler/stdlib/toolchain; do not infer compatibility solely from version.
+S-PRESETS https://raw.githubusercontent.com/rexglue/rexglue-sdk/c94f5ebdcb3c9d1a460ca48e04f9758448f8d518/CMakePresets.json
+Observed linux-amd64 configure preset with Ninja Multi-Config, Debug/Release/RelWithDebInfo, source-relative out/build and out/install directories. Use explicit configuration in builds/tests; do not assume single-config flags.
+S-SUBMODULES https://raw.githubusercontent.com/rexglue/rexglue-sdk/c94f5ebdcb3c9d1a460ca48e04f9758448f8d518/.gitmodules
+Observed thirdparty/sdl3 plus other SDK dependencies. Branch labels are descriptive; actual gitlink SHAs control checkout. Full gitlink inventory unavailable in this author session, to be recorded after Flash acquisition.
+S-APP https://raw.githubusercontent.com/rexglue/rexglue-sdk/c94f5ebdcb3c9d1a460ca48e04f9758448f8d518/include/rex/rex_app.h
+Verified ReXApp customization includes OnPreSetup, OnConfigurePaths, OnPostLoadXexImage and guest-launch/exit hooks. Retain SDK lifecycle and inspect implementation ordering rather than recreate it. Hook presence is not permission to patch game behavior or bypass checks.
+S-RUNTIME https://raw.githubusercontent.com/rexglue/rexglue-sdk/c94f5ebdcb3c9d1a460ca48e04f9758448f8d518/include/rex/runtime.h
+Verified RuntimeConfig subsystem injection, gpu_plugin, input/audio factories, kernel_init; Runtime supports image setup/load/launch and game/user/update/cache/metadata paths. Use actual SDK behavior for mounts/ownership and verify it in source/tests.
+S-GPU https://raw.githubusercontent.com/rexglue/rexglue-sdk/c94f5ebdcb3c9d1a460ca48e04f9758448f8d518/src/graphics/CMakeLists.txt
+Verified rexgpu-xenos shared runtime-loaded plugin, Vulkan sources including command processor and render/texture caches, SPIR-V translation. Consumers do not directly link this plugin target; do not duplicate runtime/core global state. Derive installed plugin discovery from chosen source and actual install tree.
+S-DEVICE https://raw.githubusercontent.com/rexglue/rexglue-sdk/c94f5ebdcb3c9d1a460ca48e04f9758448f8d518/src/ui/vulkan/vulkan_device.cpp
+Device-feature requirements must be checked on actual selected HD 620. E1's failed surface probe proves no Vulkan acceptance.
+S-CLI https://raw.githubusercontent.com/rexglue/rexglue-sdk/c94f5ebdcb3c9d1a460ca48e04f9758448f8d518/src/rexglue/CMakeLists.txt
+Verified rexglue CLI target and codegen/init command source locations. Inspect installed executable and build configuration suffix before choosing its actual path.
+S-INIT https://raw.githubusercontent.com/rexglue/rexglue-sdk/c94f5ebdcb3c9d1a460ca48e04f9758448f8d518/src/rexglue/commands/init_command.cpp
+Verified init options --project-name, --project-root, --xex-path, --game-root, optional --scan-dll. Writes project manifest and scaffold. Source normalizes manifest paths; test Linux case carefully. Current wiki's --app_name/--app_root examples are not authoritative for this SHA. Do not use force to overwrite existing project work.
+S-CODEGEN https://raw.githubusercontent.com/rexglue/rexglue-sdk/c94f5ebdcb3c9d1a460ca48e04f9758448f8d518/src/rexglue/commands/codegen_command.cpp
+Verified codegen accepts a manifest positional argument and --ignore-stamp; pre-manifest configs are rejected. It refreshes generated integration glue and may update stamps; protect generated/manifest outputs first. Permissive generation does not pass critical validation.
+S-MANIFEST https://raw.githubusercontent.com/rexglue/rexglue-sdk/c94f5ebdcb3c9d1a460ca48e04f9758448f8d518/resources/templates/init/manifest_toml.inja
+Verified project/entrypoint and optional module records with input/output paths. Use this actual schema; don't invent old config keys. Title-derived manifest data remains private by default.
+S-GENERATOR https://raw.githubusercontent.com/rexglue/rexglue-sdk/c94f5ebdcb3c9d1a460ca48e04f9758448f8d518/src/codegen/CMakeLists.txt
+Verified codegen source inventory for discovery/validation/translation and resource templates. Inspect the real phase_validate.cpp, project_recompiler.cpp and template registry in checkout before interpreting strict errors or generated ownership.
+S-LICENSE https://raw.githubusercontent.com/rexglue/rexglue-sdk/c94f5ebdcb3c9d1a460ca48e04f9758448f8d518/LICENSE
+Read selected tree and dependency notices before distribution; this SDK license grants no commercial game rights.
+Moving wiki used only for navigation: https://github.com/rexglue/rexglue-sdk/wiki/Getting-Started and https://github.com/rexglue/rexglue-sdk/wiki/Runtime-Architecture-Overview. Chosen source takes precedence. Do not transplant names/flags from newer or older wiki examples.
+
+ACQUISITION RECIPE — STEP_03 ONLY, AFTER STEP_01 PRIVACY
+Working directory: verified FrostyPickaxe root. Ensure .local/sdk exists, writable and ignored. Only for a new absent checkout:
+git clone --no-checkout https://github.com/rexglue/rexglue-sdk.git .local/sdk/rexglue-sdk
+Then working directory .local/sdk/rexglue-sdk:
+git checkout --detach c94f5ebdcb3c9d1a460ca48e04f9758448f8d518
+git submodule update --init --recursive
+git rev-parse HEAD
+git submodule status --recursive
+If checkout already exists, inspect root/status/remote and preserve changes; no blind checkout/reset over dirty work. Validate exact SHA and no missing/divergent submodule markers. Missing network/auth/tool permissions: record BLOCKED SDK, never fabricate acquisition. No upstream pushes.
+
+SDK CONFIGURE / BUILD / TEST RECIPE
+Working directory .local/sdk/rexglue-sdk. First inspect actual source/presets and compiler/version. The preset names clang/clang++; if only versioned tools exist, pass their actual discovered absolute paths via CMAKE_C_COMPILER/CMAKE_CXX_COMPILER overrides and record exact resulting command, not a made-up path. Confirm required OS/development dependencies from selected tree before installing anything within available permissions.
+cmake --preset linux-amd64 -DREXGLUE_BUILD_TESTS=ON -DREXGLUE_USE_VULKAN=ON -DREXGLUE_USE_D3D12=OFF
+cmake --build out/build/linux-amd64 --config Debug
+ctest --test-dir out/build/linux-amd64 -C Debug -N
+ctest --test-dir out/build/linux-amd64 -C Debug --output-on-failure
+cmake --build out/build/linux-amd64 --config Release
+ctest --test-dir out/build/linux-amd64 -C Release -N
+ctest --test-dir out/build/linux-amd64 -C Release --output-on-failure
+cmake --install out/build/linux-amd64 --config Release
+These are source-derived candidates to validate locally. Inspect actual test registration/labels and resource requirements. Zero discovered tests is NOT a passing suite: inventory upstream test executables/source and run their documented invocations if CTest does not register them. Do not omit required tests silently or claim every optional hardware test ran. Save each exit code and log independently. SDK-only tests do not satisfy game acceptance.
+The preset install prefix is inside this checkout; verify effective cache/install manifest and package metadata. Prevent accidental resolution of another system SDK. Record actual exported CMake package/config path and selected library/plugin artifacts. Resolve installed Release CLI from actual install manifest/listing, verify --help and --version where supported, then set a task-specific RISE360_REXGLUE_CLI variable to that actual executable path for commands below. Variable assignment uses proper shell quoting; no secrets. No assumed install success/path is evidence.
+
+PROJECT SCAFFOLD RECIPE — STEP_04, AFTER G1-BASE AND SDK BASELINE
+Working directory verified project root. Input .local/rise360/game-base/default.xex must exist from lawful provisioning, with exact identity/case recorded. Do not rename original disc files to fit this recipe; if actual spelling differs, use and record the real path. Protect .local/, port/generated/, port/rise360_manifest.toml and port/out/ before invoking any writer. Start with empty ignored .local/rise360/scaffold, never overwrite an existing scaffold blindly.
+"$RISE360_REXGLUE_CLI" init --project-name rise360 --project-root .local/rise360/scaffold --xex-path .local/rise360/game-base/default.xex --game-root .local/rise360/game-base
+This exact option spelling comes from S-INIT; confirm installed help matches pin. Review staged outputs and license/provenance. Promote only permitted original app/build glue to port/, preserving source-private derivatives. Rebind manifest paths relative to port/ using S-MANIFEST; do not copy now-invalid scaffold-relative paths. Keep original-case content intact. Inventory actual additional XEX/DLL modules; add them only with verified guest paths/tool semantics. No invented module list or mandatory DLL scan.
+
+STRICT CODEGEN — STEP_04
+Working directory verified project root, after port/rise360_manifest.toml has correct validated source/output paths:
+"$RISE360_REXGLUE_CLI" codegen port/rise360_manifest.toml --ignore-stamp
+No forced/permissive critical error bypass. This operation may regenerate integration glue/stamps; it is allowed only in active codegen scope. Derive critical coverage diagnostics from actual generator source, resolve one issue at a time and retain failure evidence. Repeat clean generation, explain timestamps separately from substantive outputs. Do not treat strict exit code alone as proof of all dynamically exercised paths.
+
+PROJECT BUILD — DERIVE FROM ACTUAL SCAFFOLD, NOT WIKI DEMO
+After private outputs and original app integration exist, inspect port/CMakePresets.json, port/CMakeLists.txt, generated SDK integration and install exports. Record actual configure/build/codegen/test targets and explicit SDK discovery path in docs/implementation/commands.md. Use the selected Linux toolchain/configuration. Do not assume game preset/target names are identical to the SDK's; no game target has been built here. Verify plugin deployment/search and actual linked SDK identity. If source template contract is missing, inspect it before coding, do not fabricate APIs. Once recorded, these real commands govern incremental builds, Step_09 clean build and Step_12 repeat.
+
+SOURCE LIMITATIONS
+Astra inspected public source through web, not a complete local checkout. GitHub tree API access failed; shell network lookup reported DNS resolution failure. Several guessed individual template/runtime paths were unavailable and are NOT API evidence. Full runtime implementation, test registration, installed plugin search and all recursive gitlinks must be read from Flash's actual pinned checkout. Do not treat such required engineering inspection as waiting for another architect. Preserve exact output/hash/source citations in the dependency record.

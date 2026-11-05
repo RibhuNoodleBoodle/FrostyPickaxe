@@ -1,0 +1,54 @@
+STEP ID + TITLE
+02 — Base-disc input validation and separate update discovery — revision 2
+
+ASSIGNED ROLE
+Gemini Flash implementer. Astra is the appointed architect and has supplied the design. Xbox 360 Rise of the Tomb Raider -> native Linux PC x86-64 / ReXGlue / Vulkan / actual Intel HD 620 / verified SDL bridge. Android deferred. Apply the full anti-cheating and reporting contract in gemini_flash/Gemini_00_Read_First.txt. Implement within this active step; no separate Argon architecture approval.
+
+READ BEFORE WORK
+Read gemini_flash/Gemini_00_Read_First.txt, Gemini_01_Personality_and_Skills.txt, Gemini_02_Architecture_and_Evidence_Gates.txt, Gemini_03_Pinned_SDK_and_Commands.txt and Astra_Evidence_and_Traceability.txt (all under gemini_flash/). Read docs/architecture/01_System_Architecture_ADR.md, 02_Modular_Responsibility_Map.md, 03_Discovery_Plan_and_Gates.md and 04_Worker_Task_Decomposition.md (all under docs/architecture/). Read README.md and docs/research/00_Repository_State.md, 01_Feasibility_Report.md, 02_Risks_Unknowns_and_Gates.md, 03_Sources_and_Evidence.md (all under docs/research/). Inspect actual predecessor proof per dependencies below, not just its PASS label. Steps 10-12 also read gemini_flash/Gemini_90_Ten_Minute_Gameplay_Acceptance.txt.
+
+VERIFIED STARTING STATE / UNKNOWN ASSUMPTIONS
+Astra wrote architecture and prompts only; no program build or gameplay exists at authorship. Historical repo HEAD adf3f12db2d8a1472bd60ce81af424aa92d2c0e6/main and six dirty docs must be rechecked/preserved. Inputs exist; R2 inner identities are reported research evidence to revalidate. HD 620 PCI observed; Vulkan XCB surface query failed. SDK c94f5ebdcb3c9d1a460ca48e04f9758448f8d518 is now selected in ADR-03 but not installed/tested by Astra. Exact future paths in A2 are decisions, not existing files. Actual input/tool/dependency/API/driver/runtime results remain to be obtained. Requirements originate in R0 as amended by user architect delegation, A1 ADR-01..09, A3 experiments and the cited R2-R5 risks. No extra architecture gate remains.
+
+OBJECTIVE AND OUT-OF-SCOPE
+Base-disc input validation and separate update discovery. Build the selected design incrementally. No substitute release/emulator, DRM bypass, fake frames/progress, success stubs, speculative multi-subsystem rewrite, Android or early publication. SDK-only and synthetic fixtures must be labeled NOT GAME-SPECIFIC ACCEPTANCE.
+
+PRECONDITIONS / STOP CONDITIONS
+Step_01 privacy PASS and documented lawful input handling. Base-only choice is already made by ADR-02; no extra source-scope approval is needed. SDK setup can proceed independently.
+Stop only the affected branch on a failed/missing actual prerequisite, unsupported critical behavior or unavailable permission. Continue independent ready tasks from A3. Do not treat unobserved behavior as working or waive final gates.
+
+ALLOWED FILES AND DIRECTORIES
+Original tools/ and synthetic tests/ for inventory/provisioning; private .local/rise360/game-base/, analysis/ and local metadata; docs/implementation/. Preserve original ISO/ZIP. No game content in fixtures or public outputs.
+These are selected future locations. Verify destination safety, exact files and ownership before mutation. Preserve unrelated user edits, original inputs and private exclusions; no destructive clean/reset. A routine bounded fix within selected architecture does not require new generic approval.
+
+EXACT WORKER ACTIONS
+Validate supplied base identity/integrity using lawful read-only metadata tooling; record actual content inventory and compare R2. Implement bounded original inventory/provisioning tooling only if necessary, testing path/bounds validation on synthetic data. Provision SDK-compatible base content locally only through an authorized lawful method; no DRM bypass or key extraction. Preserve layout/case and original hashes. Store exact source lineage and private identity manifest. Investigate TU internal applicability separately; quarantine it, never force application or modify IDs. Record G1-base independently from G1-update. Base codegen may proceed when G1-base passes despite unresolved TU; if later progression proves update dependence, block that path.
+Observe one failure -> smallest justified change -> relevant test -> retain result -> next decision. Verify exact SDK source/interfaces before coding; no made-up APIs.
+
+REBUILD / REPRODUCIBILITY COMMANDS
+Use gemini_flash/Gemini_03_Pinned_SDK_and_Commands.txt for source-derived SDK configure/build/test/install and staged init/strict-codegen recipes. Those are future recipes, not proof of execution. Step_01 uses read-only inventory plus exclusion checks; Step_02 derives actual lawful tool invocations and records them. Step_03 validates SDK recipes and saves every exact command/cwd/tool/environment/exit status in docs/implementation/commands.md. Step_04 derives real app presets/targets from actual scaffold and pins package discovery; then Steps_05-12 use that verified app command record. No game build target is assumed to exist before creation. Missing input does not block SDK-only commands; no graphics is required to claim compilation. Record clean-repeat source/config/SDK/patch/input/binary identities. Never execute guessed demo flags or fabricate an unrun command result.
+
+REAL TEST OR PROBE PROCEDURE
+Recheck reported base Title/Media/version/hash and immutable original identity. Validate selected tooling and content bounds with synthetic negative fixtures, then lawful local metadata/provisioning with exact tool/version/output identity. Confirm case/layout and output exclusion. Inspect TU internal applicability separately if tooling permits; never require shared Title ID alone as proof. G1-base can PASS without G1-update. No force patch, source mutation or key handling.
+
+PASS / FAIL / BLOCKED CRITERIA
+G1-base PASS requires verified exact base source, authorized compatible local provisioning and exclusions. TU remains independently PASS/FAIL/BLOCKED, never silently waived. Missing lawful provisioning blocks game codegen, not Step_03.
+All PASS evidence needs actual command/observation, exit status where applicable, timestamp/host, exact source and SDK identities and artifact/hash pointers. Code written, compiled SDK, launched window, rendered menu and gameplay remain different outcomes.
+
+EVIDENCE TO SAVE
+docs/implementation/ per A3: exact commands/exit status, source candidate/diff and SDK/patch/dependency identities, changed files/rationale, regression and blocker records, M0-M11 and experiment statuses. Raw logs/input metadata/binaries/captures stay under verified ignored .local/rise360/proof/ or analysis/. Record binary/plugin hashes and selected device where relevant. Use actual screenshot/video/frame/input/clock evidence for visual tests; no public commercial content, secrets or generated game source. Preserve failed attempts too.
+
+FAILURE DIAGNOSIS / ONE-ISSUE-AT-A-TIME RETRY
+Separate container corruption, identity mismatch and unsupported inspection tooling; preserve originals and stop rather than rewrite IDs.
+Do not suppress failing checks or erase failing evidence. Retain first failure, hypothesis, minimal change and retest. Return to owning step for source changes; invalidate affected downstream proofs. If feasibility or authorization fails, stop that branch and report the minimal actionable unblock request.
+
+FINAL STEP REPORT TEMPLATE / HANDOFF TO NEXT STEP
+STEP / DATE / MACHINE / SOURCE COMMIT plus exact candidate diff/snapshot / SDK COMMIT
+STATUS: PASS | FAIL | BLOCKED | NOT TESTED (record subgates separately)
+CHANGED: exact paths and purpose
+COMMANDS: executed commands, exit status, sanitized log pointers
+CHECKS: requirement -> evidence -> result
+REGRESSIONS: yes/no and actual tests
+BLOCKERS: concrete error, affected dependencies, next smallest correction
+NEXT ALLOWED STEP: Step_04 only after G1-base and Step_03 PASS; otherwise continue Step_03 if ready. Update investigation is an independent branch.
+Update docs/implementation/status.md and never equate fixture/build/idle time with real game acceptance.

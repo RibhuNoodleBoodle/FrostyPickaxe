@@ -1,0 +1,227 @@
+FROSTYPICKAXE — IMPLEMENTATION PACKAGE INDEX — REVISION 2
+22 UTF-8 .txt prompt/support files plus 4 architecture .md files = 26 documents; 12 numbered worker steps. Full anti-cheating/report contract in Gemini_00_Read_First.txt applies to every task. R/E/A/S references resolve in that entry file and S1. No game has been built or run by Astra.
+
+FIRST GIVE FLASH gemini_flash/Gemini_00_Read_First.txt.
+Astra is the user-appointed architect. Architecture is supplied in the four docs/architecture files; no separate Argon approval is pending. Read 01/02, A1-A4, S1 and E1, then execute Step_01. Start source discovery (02) and SDK baseline (03) independently as ready. Join verified base plus SDK at 04 -> 05 -> bounded graphics/input/media branches 06/07/08 -> clean build 09 -> early play 10 -> actual protocol 90 through step 11 -> final clean repeat/audit 12 -> publication 99. Read 90 before rehearsal/acceptance. Any source change invalidates affected downstream proofs. No Android step.
+
+All implementation paths are selected future paths, not claims of existing code. Authoritative design decisions are Astra ADR-01..09. Base-only scope is explicit, update quarantined; unsupported essential features or missing lawful inputs/device/test evidence still block their dependent gates. Continue independent useful work. Final acceptance and publication cannot be skipped.
+
+COMPLETE MANIFEST
+
+FILE: gemini_flash/Gemini_00_Read_First.txt
+PURPOSE: FIRST prompt: user delegation, current design, invariants and full anti-cheating/report contract
+PREREQUISITES / FILE DEPENDENCIES: Current repository; this file is entry point
+PERMITTED TASKS: Orient and follow active step
+VALIDATION GATE: Architecture supplied, scoped work can begin
+STOP CONDITION: Only actual unmet dependent prerequisites, never absent Argon approval
+
+FILE: gemini_flash/Gemini_01_Personality_and_Skills.txt
+PURPOSE: Implementation behavior and required domains
+PREREQUISITES / FILE DEPENDENCIES: 00 and A1-A4
+PERMITTED TASKS: Read role and apply engineering discipline
+VALIDATION GATE: Observed/source-based claims and bounded work
+STOP CONDITION: Unknown tool/API/behavior requires inspection, not invention
+
+FILE: gemini_flash/Gemini_02_Architecture_and_Evidence_Gates.txt
+PURPOSE: Selected ADR summary and true dependency graph
+PREREQUISITES / FILE DEPENDENCIES: 00; A1-A4; S1
+PERMITTED TASKS: Evaluate scoped prerequisites
+VALIDATION GATE: Identify ready tasks and actual technical gates
+STOP CONDITION: Block only dependent tasks; final core acceptance cannot be waived
+
+FILE: gemini_flash/Gemini_03_Pinned_SDK_and_Commands.txt
+PURPOSE: Pinned sources and executable future acquisition/build/init/codegen recipes
+PREREQUISITES / FILE DEPENDENCIES: 00; ADR-02/03/04; actual step prerequisites
+PERMITTED TASKS: Source inspection and commands ONLY in active worker scope
+VALIDATION GATE: Exact source/help/checkout agree; actual commands logged
+STOP CONDITION: Missing source/tool/permission or contract mismatch blocks affected operation
+
+FILE: docs/architecture/01_System_Architecture_ADR.md
+PURPOSE: Nine selected architecture decisions, alternatives and empirical limits
+PREREQUISITES / FILE DEPENDENCIES: User architect delegation; R0/R2-R5/E1/S1 and 00
+PERMITTED TASKS: Read and implement selected decisions within active step; amend justified details with evidence
+VALIDATION GATE: Decisions translated into tested implementation; design is not runtime proof
+STOP CONDITION: Concrete source/capability conflict or fundamental scope change, not another architect approval
+
+FILE: docs/architecture/02_Modular_Responsibility_Map.md
+PURPOSE: Concrete future paths, module/data ownership and semantic interfaces
+PREREQUISITES / FILE DEPENDENCIES: User architect delegation; R0/R2-R5/E1/S1 and 00
+PERMITTED TASKS: Read and implement selected decisions within active step; amend justified details with evidence
+VALIDATION GATE: Decisions translated into tested implementation; design is not runtime proof
+STOP CONDITION: Concrete source/capability conflict or fundamental scope change, not another architect approval
+
+FILE: docs/architecture/03_Discovery_Plan_and_Gates.md
+PURPOSE: Experiments, dependency graph, statuses and evidence schemas
+PREREQUISITES / FILE DEPENDENCIES: User architect delegation; R0/R2-R5/E1/S1 and 00
+PERMITTED TASKS: Read and implement selected decisions within active step; amend justified details with evidence
+VALIDATION GATE: Decisions translated into tested implementation; design is not runtime proof
+STOP CONDITION: Concrete source/capability conflict or fundamental scope change, not another architect approval
+
+FILE: docs/architecture/04_Worker_Task_Decomposition.md
+PURPOSE: Bounded Flash implementation packages and handoffs
+PREREQUISITES / FILE DEPENDENCIES: User architect delegation; R0/R2-R5/E1/S1 and 00
+PERMITTED TASKS: Read and implement selected decisions within active step; amend justified details with evidence
+VALIDATION GATE: Decisions translated into tested implementation; design is not runtime proof
+STOP CONDITION: Concrete source/capability conflict or fundamental scope change, not another architect approval
+
+FILE: gemini_flash/Astra_Evidence_and_Traceability.txt
+PURPOSE: Historical audit, unchanged source hashes and current authority/traceability addendum
+PREREQUISITES / FILE DEPENDENCIES: 00; R1-R6; A1-A4/S1
+PERMITTED TASKS: Read/revalidate current facts
+VALIDATION GATE: Reported, observed, chosen and untested facts remain distinct
+STOP CONDITION: Never treat historical lack of design or old evidence as current status
+
+FILE: gemini_flash/ARCHITECTURE_DECISIONS_NEEDED.txt
+PURPOSE: Retained filename explains resolved architecture role and remaining empirical work
+PREREQUISITES / FILE DEPENDENCIES: 00; A1-A4
+PERMITTED TASKS: Navigate current decisions and real blockers
+VALIDATION GATE: No generic approval loop; technical facts tested by owning steps
+STOP CONDITION: Only specified dependent empirical blockers
+
+FILE: gemini_flash/Gemini_Step_01.txt
+PURPOSE: 01 — Repository audit, private boundaries and work initialization — revision 2
+PREREQUISITES / FILE DEPENDENCIES: 00/01/02/S1 and A1-A4; Current project and user architect delegation. No separate Argon design prerequisite. Audit may complete with future GPU/input gates blocked.
+Stop only the affected branch on a failed/missing actual prerequisite, unsupported critical behavior or unavailable permission. Continue independent ready tasks from A3. Do not treat unobserved behavior as working or waive final gates.
+PERMITTED TASKS: .gitignore (preserve existing rules; add narrow architecture exclusions) and docs/implementation/ only. Read-only original inputs and existing docs. Do not change README.
+These are selected future locations. Verify destination safety, exact files and ownership before mutation. Preserve unrelated user edits, original inputs and private exclusions; no destructive clean/reset. A routine bounded fix within selected architecture does not require new generic approval.
+VALIDATION GATE: PASS means correct project, preserved baseline, safe output boundaries and honest dependency ledger; future tests may remain BLOCKED/NOT TESTED. Wrong repository or unsafe destinations block mutation. Missing another architect is not a blocker.
+All PASS evidence needs actual command/observation, exit status where applicable, timestamp/host, exact source and SDK identities and artifact/hash pointers. Code written, compiled SDK, launched window, rendered menu and gameplay remain different outcomes.
+STOP CONDITION: Failed or unavailable actual prerequisite blocks its dependent task; preserve evidence and continue independent ready tasks. See step for specific fault/retry procedure.
+
+FILE: gemini_flash/Gemini_Step_02.txt
+PURPOSE: 02 — Base-disc input validation and separate update discovery — revision 2
+PREREQUISITES / FILE DEPENDENCIES: 00/01/02/S1 and A1-A4; Step_01 privacy PASS and documented lawful input handling. Base-only choice is already made by ADR-02; no extra source-scope approval is needed. SDK setup can proceed independently.
+Stop only the affected branch on a failed/missing actual prerequisite, unsupported critical behavior or unavailable permission. Continue independent ready tasks from A3. Do not treat unobserved behavior as working or waive final gates.
+PERMITTED TASKS: Original tools/ and synthetic tests/ for inventory/provisioning; private .local/rise360/game-base/, analysis/ and local metadata; docs/implementation/. Preserve original ISO/ZIP. No game content in fixtures or public outputs.
+These are selected future locations. Verify destination safety, exact files and ownership before mutation. Preserve unrelated user edits, original inputs and private exclusions; no destructive clean/reset. A routine bounded fix within selected architecture does not require new generic approval.
+VALIDATION GATE: G1-base PASS requires verified exact base source, authorized compatible local provisioning and exclusions. TU remains independently PASS/FAIL/BLOCKED, never silently waived. Missing lawful provisioning blocks game codegen, not Step_03.
+All PASS evidence needs actual command/observation, exit status where applicable, timestamp/host, exact source and SDK identities and artifact/hash pointers. Code written, compiled SDK, launched window, rendered menu and gameplay remain different outcomes.
+STOP CONDITION: Failed or unavailable actual prerequisite blocks its dependent task; preserve evidence and continue independent ready tasks. See step for specific fault/retry procedure.
+
+FILE: gemini_flash/Gemini_Step_03.txt
+PURPOSE: 03 — Acquire pinned SDK and establish executable baseline — revision 2
+PREREQUISITES / FILE DEPENDENCIES: 00/01/02/S1 and A1-A4; Step_01 PASS. Step_02, TU compatibility and working display are NOT dependencies for public SDK setup. Use ADR-03 selected SHA and available tool permissions.
+Stop only the affected branch on a failed/missing actual prerequisite, unsupported critical behavior or unavailable permission. Continue independent ready tasks from A3. Do not treat unobserved behavior as working or waive final gates.
+PERMITTED TASKS: .local/sdk/rexglue-sdk/ source/build/install; original tools/ as needed; docs/implementation/ dependency/command/license records. No system-wide changes without actual permissions; no title code in SDK checkout.
+These are selected future locations. Verify destination safety, exact files and ownership before mutation. Preserve unrelated user edits, original inputs and private exclusions; no destructive clean/reset. A routine bounded fix within selected architecture does not require new generic approval.
+VALIDATION GATE: PASS is reproducible inspected/pinned SDK baseline with required actual tests and dependency/license records, explicitly SDK-ONLY. Missing source/tool/dependency/access blocks baseline, not architecture authoring. Zero tests discovered is not suite PASS.
+All PASS evidence needs actual command/observation, exit status where applicable, timestamp/host, exact source and SDK identities and artifact/hash pointers. Code written, compiled SDK, launched window, rendered menu and gameplay remain different outcomes.
+STOP CONDITION: Failed or unavailable actual prerequisite blocks its dependent task; preserve evidence and continue independent ready tasks. See step for specific fault/retry procedure.
+
+FILE: gemini_flash/Gemini_Step_04.txt
+PURPOSE: 04 — Create rise360 project and strictly generate base-game code — revision 2
+PREREQUISITES / FILE DEPENDENCIES: 00/01/02/S1 and A1-A4; Step_02 G1-base PASS plus Step_03 PASS. No TU gate for selected base variant. Paths and responsibilities selected by ADR-04/05; no further architecture approval.
+Stop only the affected branch on a failed/missing actual prerequisite, unsupported critical behavior or unavailable permission. Continue independent ready tasks from A3. Do not treat unobserved behavior as working or waive final gates.
+PERMITTED TASKS: port/ original app/build files; tools/ original regeneration support; tests/ original semantic probes; private port/generated/ and port/rise360_manifest.toml; .local/rise360/scaffold/ and analysis/; docs/implementation/. Keep all game-derived outputs ignored.
+These are selected future locations. Verify destination safety, exact files and ownership before mutation. Preserve unrelated user edits, original inputs and private exclusions; no destructive clean/reset. A routine bounded fix within selected architecture does not require new generic approval.
+VALIDATION GATE: PASS requires genuine chosen-base strict generation plus explained critical entry/dispatch/instruction coverage and reproducible output ownership. Forced files or unsupported critical behavior fail; missing lawful input blocks this step. Not yet game build/playability PASS.
+All PASS evidence needs actual command/observation, exit status where applicable, timestamp/host, exact source and SDK identities and artifact/hash pointers. Code written, compiled SDK, launched window, rendered menu and gameplay remain different outcomes.
+STOP CONDITION: Failed or unavailable actual prerequisite blocks its dependent task; preserve evidence and continue independent ready tasks. See step for specific fault/retry procedure.
+
+FILE: gemini_flash/Gemini_Step_05.txt
+PURPOSE: 05 — Integrate SDK launcher, guest services and single-disc content — revision 2
+PREREQUISITES / FILE DEPENDENCIES: 00/01/02/S1 and A1-A4; Step_04 strict generation PASS and Step_03 contract inspection. ADR-05 governs; do not wait for another approved runtime design.
+Stop only the affected branch on a failed/missing actual prerequisite, unsupported critical behavior or unavailable permission. Continue independent ready tasks from A3. Do not treat unobserved behavior as working or waive final gates.
+PERMITTED TASKS: port/src/main.cpp, port/src/rise360_app.h, needed port/src/guest/, content/, diagnostics/; related tests/ and original patches/rexglue/ for reproduced SDK bugs. Private runtime inputs/saves under .local/rise360/.
+These are selected future locations. Verify destination safety, exact files and ownership before mutation. Preserve unrelated user edits, original inputs and private exclusions; no destructive clean/reset. A routine bounded fix within selected architecture does not require new generic approval.
+VALIDATION GATE: PASS covers required exercised startup/runtime semantics with actual game traces, critical imports addressed and honest residual inventory. A synthetic test alone cannot pass M3. Rendering and extended scene progression remain distinct milestones.
+All PASS evidence needs actual command/observation, exit status where applicable, timestamp/host, exact source and SDK identities and artifact/hash pointers. Code written, compiled SDK, launched window, rendered menu and gameplay remain different outcomes.
+STOP CONDITION: Failed or unavailable actual prerequisite blocks its dependent task; preserve evidence and continue independent ready tasks. See step for specific fault/retry procedure.
+
+FILE: gemini_flash/Gemini_Step_06.txt
+PURPOSE: 06 — Validate HD 620 Vulkan device and real Xenos frame path — revision 2
+PREREQUISITES / FILE DEPENDENCIES: 00/01/02/S1 and A1-A4; Step_01 sufficient for device/display preflight; Step_05 required for title rendering. Missing physical rendering access blocks only dependent graphics/gameplay acceptance. ADR-06 selects existing plugin/backend.
+Stop only the affected branch on a failed/missing actual prerequisite, unsupported critical behavior or unavailable permission. Continue independent ready tasks from A3. Do not treat unobserved behavior as working or waive final gates.
+PERMITTED TASKS: Thin port/ renderer selection/deployment/diagnostics; original patches/rexglue/ for reproduced existing-backend defects and relevant tests; .local/rise360/proof/ captures. No speculative new renderer.
+These are selected future locations. Verify destination safety, exact files and ownership before mutation. Preserve unrelated user edits, original inputs and private exclusions; no destructive clean/reset. A routine bounded fix within selected architecture does not require new generic approval.
+VALIDATION GATE: PASS requires actual selected HD 620 Vulkan work and real title scene/frame evidence within declared scope, without severe unresolved correctness blockers. Device enumeration/initialization/static image/movie/software/API fallback fails as acceptance. Missing capture/display is BLOCKED, not all-project failure.
+All PASS evidence needs actual command/observation, exit status where applicable, timestamp/host, exact source and SDK identities and artifact/hash pointers. Code written, compiled SDK, launched window, rendered menu and gameplay remain different outcomes.
+STOP CONDITION: Failed or unavailable actual prerequisite blocks its dependent task; preserve evidence and continue independent ready tasks. See step for specific fault/retry procedure.
+
+FILE: gemini_flash/Gemini_Step_07.txt
+PURPOSE: 07 — Implement and prove SDL-to-guest controller semantics — revision 2
+PREREQUISITES / FILE DEPENDENCIES: 00/01/02/S1 and A1-A4; Step_05 plus inspected pinned SDL bridge for implementation; Step_06 and physical tester/controller are needed for visual end-to-end M5 PASS, not for original mapping tests. ADR-07 selects reuse first.
+Stop only the affected branch on a failed/missing actual prerequisite, unsupported critical behavior or unavailable permission. Continue independent ready tasks from A3. Do not treat unobserved behavior as working or waive final gates.
+PERMITTED TASKS: Needed port/src/input/ and thin app wiring; relevant synthetic tests/; narrowly reproduced original SDK patches; private input/proof logs and sanitized audit.
+These are selected future locations. Verify destination safety, exact files and ownership before mutation. Preserve unrelated user edits, original inputs and private exclusions; no destructive clean/reset. A routine bounded fix within selected architecture does not require new generic approval.
+VALIDATION GATE: PASS requires genuine controller-to-guest-to-visible-game response and relevant edge behavior; enumerated SDL device alone is insufficient. Preparatory tests are recorded separately; unavailable controller/graphics blocks full M5.
+All PASS evidence needs actual command/observation, exit status where applicable, timestamp/host, exact source and SDK identities and artifact/hash pointers. Code written, compiled SDK, launched window, rendered menu and gameplay remain different outcomes.
+STOP CONDITION: Failed or unavailable actual prerequisite blocks its dependent task; preserve evidence and continue independent ready tasks. See step for specific fault/retry procedure.
+
+FILE: gemini_flash/Gemini_Step_08.txt
+PURPOSE: 08 — Complete required audio, media, streaming and timing paths — revision 2
+PREREQUISITES / FILE DEPENDENCIES: 00/01/02/S1 and A1-A4; Step_05 and actual media/import inventory. Step_06/07 as required for observed interactive progression tests; their blocked state does not prevent independent semantic inspection/tests.
+Stop only the affected branch on a failed/missing actual prerequisite, unsupported critical behavior or unavailable permission. Continue independent ready tasks from A3. Do not treat unobserved behavior as working or waive final gates.
+PERMITTED TASKS: Needed port/src/content/, guest/ or narrowly scoped media adapter under port/src/; original SDK corrections in patches/rexglue/ and relevant tests. Private .local/rise360/ state/proof only for real data.
+These are selected future locations. Verify destination safety, exact files and ownership before mutation. Preserve unrelated user edits, original inputs and private exclusions; no destructive clean/reset. A routine bounded fix within selected architecture does not require new generic approval.
+VALIDATION GATE: PASS requires required early media/streaming behavior with actual progression proof and no concealed hard fault. Unsupported essential codec/API or unavailable content blocks progression; untested broader content stays NOT TESTED.
+All PASS evidence needs actual command/observation, exit status where applicable, timestamp/host, exact source and SDK identities and artifact/hash pointers. Code written, compiled SDK, launched window, rendered menu and gameplay remain different outcomes.
+STOP CONDITION: Failed or unavailable actual prerequisite blocks its dependent task; preserve evidence and continue independent ready tasks. See step for specific fault/retry procedure.
+
+FILE: gemini_flash/Gemini_Step_09.txt
+PURPOSE: 09 — Independently verify first clean game-specific build — revision 2
+PREREQUISITES / FILE DEPENDENCIES: 00/01/02/S1 and A1-A4; Applicable Steps_04-08 integration gates passed; exact source candidate and SDK/dependency/private-input identities frozen. Earlier diagnostic builds do not replace this milestone.
+Stop only the affected branch on a failed/missing actual prerequisite, unsupported critical behavior or unavailable permission. Continue independent ready tasks from A3. Do not treat unobserved behavior as working or waive final gates.
+PERMITTED TASKS: Clean source snapshot/build/private regeneration/proof locations and docs/implementation/ only. Any source repair returns to owning step; no commit/push yet.
+These are selected future locations. Verify destination safety, exact files and ownership before mutation. Preserve unrelated user edits, original inputs and private exclusions; no destructive clean/reset. A routine bounded fix within selected architecture does not require new generic approval.
+VALIDATION GATE: PASS requires authentic fresh game-specific compiled/linked executable plus verified launch and required checks. SDK template/hello-world/configure-only output fails. Gameplay is not passed by this gate.
+FAIL means observed violation; BLOCKED means missing prerequisite; NOT TESTED means no execution. PASS requires exact command, exit status, UTC timestamp, version/host, source/SDK/input identities, evidence path and relevant hashes. Separate tested scope from later untested features.
+STOP CONDITION: Failed or unavailable actual prerequisite blocks its dependent task; preserve evidence and continue independent ready tasks. See step for specific fault/retry procedure.
+
+FILE: gemini_flash/Gemini_Step_10.txt
+PURPOSE: 10 — Prove authentic New Game and early player progression — revision 2
+PREREQUISITES / FILE DEPENDENCIES: 00/01/02/S1 and A1-A4; Step_09 PASS, genuine base-variant binary, actual working required graphics/input/media and tester. If base requires update, stop and resolve G1-update, do not silently change source.
+Stop only the affected branch on a failed/missing actual prerequisite, unsupported critical behavior or unavailable permission. Continue independent ready tasks from A3. Do not treat unobserved behavior as working or waive final gates.
+PERMITTED TASKS: Sanitized audit and ignored local proof/new test-save state; do not overwrite personal saves. Code fixes return to owning steps.
+These are selected future locations. Verify destination safety, exact files and ownership before mutation. Preserve unrelated user edits, original inputs and private exclusions; no destructive clean/reset. A routine bounded fix within selected architecture does not require new generic approval.
+VALIDATION GATE: PASS requires real New Game advancing state and substantive control without hard progression blockers. No replay/movie/mock or alternate release can satisfy it.
+FAIL means observed violation; BLOCKED means missing prerequisite; NOT TESTED means no execution. PASS requires exact command, exit status, UTC timestamp, version/host, source/SDK/input identities, evidence path and relevant hashes. Separate tested scope from later untested features.
+STOP CONDITION: Failed or unavailable actual prerequisite blocks its dependent task; preserve evidence and continue independent ready tasks. See step for specific fault/retry procedure.
+
+FILE: gemini_flash/Gemini_Step_11.txt
+PURPOSE: 11 — Run observed ten-minute gameplay acceptance — revision 2
+PREREQUISITES / FILE DEPENDENCIES: 00/01/02/S1 and A1-A4; Step_10 PASS; unchanged qualified binary; actual HD 620 Vulkan, controller/tester and permitted continuous proof. Gemini_90 governs.
+Stop only the affected branch on a failed/missing actual prerequisite, unsupported critical behavior or unavailable permission. Continue independent ready tasks from A3. Do not treat unobserved behavior as working or waive final gates.
+PERMITTED TASKS: Only docs/implementation/ sanitized reports and .local/rise360/proof/ local logs/captures; no code changes within accepted run.
+These are selected future locations. Verify destination safety, exact files and ownership before mutation. Preserve unrelated user edits, original inputs and private exclusions; no destructive clean/reset. A routine bounded fix within selected architecture does not require new generic approval.
+VALIDATION GATE: PASS only when every core Gemini_90 item passes. Missing observation/capture/device prevents verification: GAMEPLAY NOT VERIFIED and BLOCKED final push.
+FAIL means observed violation; BLOCKED means missing prerequisite; NOT TESTED means no execution. PASS requires exact command, exit status, UTC timestamp, version/host, source/SDK/input identities, evidence path and relevant hashes. Separate tested scope from later untested features.
+STOP CONDITION: Failed or unavailable actual prerequisite blocks its dependent task; preserve evidence and continue independent ready tasks. See step for specific fault/retry procedure.
+
+FILE: gemini_flash/Gemini_Step_12.txt
+PURPOSE: 12 — Reproduce final HD 620 gameplay and audit publication — revision 2
+PREREQUISITES / FILE DEPENDENCIES: 00/01/02/S1 and A1-A4; Step_11 PASS; final source candidate frozen; ADR-08 functional and measurement policy applies. No external numeric-performance approval prerequisite; report experimental aspirations honestly.
+Stop only the affected branch on a failed/missing actual prerequisite, unsupported critical behavior or unavailable permission. Continue independent ready tasks from A3. Do not treat unobserved behavior as working or waive final gates.
+PERMITTED TASKS: Clean reproduction and ignored proof locations; docs/implementation/; evidence-grounded README and dependency/license notices only as needed. Preserve unrelated original user edits.
+These are selected future locations. Verify destination safety, exact files and ownership before mutation. Preserve unrelated user edits, original inputs and private exclusions; no destructive clean/reset. A routine bounded fix within selected architecture does not require new generic approval.
+VALIDATION GATE: PASS requires clean reproduced functional acceptance on actual HD 620, truthful measured limitations and safe original publication set. Severe persistent unresponsiveness or unresolved core fidelity faults fail functional acceptance. Restricted file rights block those files; missing core technical evidence blocks final push.
+All PASS evidence needs actual command/observation, exit status where applicable, timestamp/host, exact source and SDK identities and artifact/hash pointers. Code written, compiled SDK, launched window, rendered menu and gameplay remain different outcomes.
+STOP CONDITION: Failed or unavailable actual prerequisite blocks its dependent task; preserve evidence and continue independent ready tasks. See step for specific fault/retry procedure.
+
+FILE: gemini_flash/Gemini_90_Ten_Minute_Gameplay_Acceptance.txt
+PURPOSE: Binding authentic gameplay protocol; executed in 11 and repeated in 12
+PREREQUISITES / FILE DEPENDENCIES: 00/A1 ADR-08; Step_09/10 proof
+PERMITTED TASKS: Observed genuine interactive local session; proof/report only
+VALIDATION GATE: All eight core rows PASS and >=600 eligible monotonic seconds
+STOP CONDITION: Unavailable real tester/device/capture or failed authentic progression: GAMEPLAY NOT VERIFIED
+
+FILE: gemini_flash/Gemini_99_Repository_Push_Gate.txt
+PURPOSE: Last gate: scoped original-content commit/push
+PREREQUISITES / FILE DEPENDENCIES: 00/A1 ADR-09; all applicable M0-M10 including 90/12 passed
+PERMITTED TASKS: Review/scoped Git publication only under actual authority and safe file set
+VALIDATION GATE: Clean exact-candidate proof plus actual destination SHA verification
+STOP CONDITION: Technical/core FAIL/BLOCKED, restricted content/rights or missing trusted/authenticated destination: BLOCKED PUSH
+
+FILE: gemini_flash/Astra_Quality_Review.txt
+PURPOSE: Architecture/prompt consistency review
+PREREQUISITES / FILE DEPENDENCIES: All current package and architecture files
+PERMITTED TASKS: Documentation review only
+VALIDATION GATE: Complete manifest/sections/source trace and preserved baseline
+STOP CONDITION: An omission requires doc correction, no technical success inference
+
+FILE: gemini_flash/Gemini_Prompt_Index.txt
+PURPOSE: Complete manifest, reading order and task navigation
+PREREQUISITES / FILE DEPENDENCIES: 00 and all listed documents
+PERMITTED TASKS: Read/navigate only
+VALIDATION GATE: All 26 named documents exist; 12 steps
+STOP CONDITION: Missing actual file/dependency stops dependent use

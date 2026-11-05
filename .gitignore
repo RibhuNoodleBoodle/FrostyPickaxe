@@ -1,3 +1,15 @@
 /*.txt
 /*.iso
 /*.zip
+
+# Architecture exclusions (ADR-04)
+.local/
+port/generated/
+port/rise360_manifest.toml
+port/out/
+
+# Python cache exclusions
+__pycache__/
+*.pyc
+
+

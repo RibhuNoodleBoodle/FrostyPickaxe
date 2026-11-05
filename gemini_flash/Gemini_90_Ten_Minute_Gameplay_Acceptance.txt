@@ -1,0 +1,44 @@
+GEMINI FLASH — M9 ACCEPTANCE PROTOCOL
+For FrostyPickaxe, actual Xbox 360 Rise of the Tomb Raider, native PC x86-64, ReXGlue static AOT, Vulkan and actual Intel HD 620. Android deferred. Read gemini_flash/Gemini_00_Read_First.txt and apply ALL anti-cheating/report requirements. Also read Gemini_02, Step_09, Step_10, Step_11, Step_12 and their evidence plus R2/R4 (source identity and EXP-03/04/05/06). Astra architecture exists in docs/architecture/01_System_Architecture_ADR.md and companion documents; no executable or gameplay evidence exists at authoring. This protocol is conditional on real technical prerequisites, not external architecture approval. Run only after Step_10 PASS. Step_12 repeats for the final clean candidate.
+
+Allowed writes: sanitized audit documents and verified ignored local proof artifacts only. No code edits during an accepted session. Actual launch/test commands must come from the pinned validated reproduction record, not invented CLI flags. Missing human observation, permitted continuous local capture, valid inputs, verified ADR-02 source identity, actual HD 620 Vulkan or working controls means BLOCKED; final push remains blocked. The exact scene sequence is not known; discover it in Step_10 and record real checkpoint names then.
+
+Gemini_90_Ten_Minute_Gameplay_Acceptance.txt must contain a rigorous, reproducible protocol, with acceptance conditions grounded in actual game structure:
+
+PRE-RUN:
+  - Clean, version-pinned game-specific PC build, exit code 0 for required tests.
+  - Binary identity and SHA-256; game inputs verified locally without disclosure.
+  - OS, CPU, RAM, driver, Vulkan physical device and GPU model (Intel HD 620 baseline), resolution/settings, SDL version, gamepad model, build/SDK commits.
+  - Real game executable launched locally, Vulkan renderer active, no surrogate game/emulator/PC-edition fallback.
+  - A valid new game state and sufficient diagnostic logging. Start capture before launching or choosing New Game. Save raw logs and a screen recording where permitted; never publish copyrighted footage/assets without appropriate rights.
+
+START / CLOCK RULE:
+  - Define T0 as the point a New Game selection starts real in-game progression, not OS process creation or a 10-minute idle timer.
+  - Count at least 600 seconds of real MONOTONIC WALL-CLOCK elapsed within the same progressing game session, excluding pause menus, debugger stops, intentional idle padding, recompilation/build time, game restarts, unrelated videos or test harness waits.
+  - Genuine, non-looping mandatory intro cutscenes may count as part of the first-ten-minute sequence, but the evidence must ALSO demonstrate substantive player-controlled motion and interactions when the game allows it. A continuous 10-minute movie is insufficient.
+  - Include timestamped activity checkpoints chosen based on actual scene flow (approximately T0, 2, 5, 8 and >=10 minutes) documenting position/scene identity, input response, transitions and game-state changes. Do not invent expected checkpoint names if the opening sequence has not been inspected.
+  - Validate the executable is live, game threads responsive, frame presentation advances and controls work. A scene visually frozen while the timer runs is FAIL.
+  - End with a valid advancing game state after ten minutes; capture final state, logs and progression summary.
+
+PROOF PACKAGE:
+  - Exact launch/test commands and success/failure exit statuses.
+  - Unedited local continuous recording or lossless capture where practical, timestamps consistent with log timeline; screenshots of meaningful checkpoints are supplementary, not sufficient alone.
+  - Vulkan device name and usage, game process identity, GPU frame output evidence (capture/validation), input event/progression samples, crash/hang reports.
+  - Honest notes on broken textures, missing sound, artifacts, low FPS, stalls and any workarounds. 'Playable' is not a binary substitute for measured behavior.
+  - Recorded checksums of executable and relevant logs; keep commercially copyrighted data off public hosting.
+  - A final matrix: game-specific build, boot, scene rendering, SDL controls, progression, continuous >=600s, HD 620, post-run stability; each PASS/FAIL/BLOCKED with pointers to evidence.
+
+PASS requires ALL core items. An unattended scripted harness may provide extra test coverage but does NOT replace a genuine, visually observed interactive session. If this session cannot be performed, mark GAMEPLAY NOT VERIFIED and block the final push gate as defined here; do not use an alternate release or emulator as proxy.
+
+PERFORMANCE: capture actual FPS/frametime/memory data where possible, but DO NOT invent a guaranteed target such as 30 FPS. Severe persistent unresponsiveness blocking normal progress is a gameplay failure. Low but advancing frame rate must be reported truthfully and assessed against ADR-08 functional criteria and any subsequent explicit user criteria; never label a slideshow a successful playable target solely because the timer elapsed.
+
+OPERATIONAL CLOCK AND AUDIT DETAILS
+Record T0 and T_end on the same monotonic clock with a mapping to recording/log timestamps. Record every excluded interval with start/end/reason, merging overlaps so time is not subtracted twice. Eligible duration = monotonic end minus start minus union of excluded intervals. It must be >=600 seconds in one actual advancing session. Extend observation to compensate for pauses; do not add previous attempts or restarts. Loading/streaming stalls must be visible and separately timed; never use a stalled state to pad eligibility. Mandatory non-looping game cutscenes can count as stated above; require substantive real player control when available. No clock speed hacks or scripted success states.
+
+At each actual checkpoint record real scene/state identity, visible advancing frames, input response, interactions/transition observations, wall time and eligible elapsed time. A reviewer should be able to locate every checkpoint in continuous local proof. Correlate process executable path/hash with the launched binary and logs; demonstrate Vulkan usage/device selection with frame/device evidence, not a printed string alone. Document all flaws and required settings. Preserve original logs/recording with hashes; redacted derivative summaries must identify omissions. Keep copyrighted media private unless distribution is expressly permitted.
+
+After >=600 eligible seconds, demonstrate another meaningful input response and advancing state, inspect crash/hang/device-loss/audio/streaming errors, and record orderly exit or observed post-run health. Save test exit statuses honestly; do not manufacture a successful exit from a process still running. Obtain separate review or a second clean run where possible; if no independent verifier is available disclose it and still cross-check recording, actual process/binary, compiler provenance and logs.
+
+Required final matrix rows: game-specific build; boot; real Vulkan scene rendering; SDL-to-guest controls; authentic progression; continuous eligible >=600 seconds; actual HD 620; post-run stability. Each row needs PASS/FAIL/BLOCKED, test command/observation and exact proof pointer. Record measured performance/fidelity separately under ADR-08 criteria, never invent 30 FPS. All core rows PASS required; otherwise GAMEPLAY NOT VERIFIED and no final push.
+
+Failure handling: preserve first divergent frame/time/input and logs; isolate a single subsystem, return to its owning step, rebuild/requalify after edits and restart full acceptance. Do not relax the protocol to rescue a result. Finish with the full STEP/DATE/MACHINE/SOURCE/SDK, STATUS, CHANGED, COMMANDS, CHECKS, REGRESSIONS, BLOCKERS, NEXT ALLOWED STEP report from Gemini_00. Successful Step_11 hands to Step_12; final clean-repeat success hands to Gemini_99 only after M10 audit passes.

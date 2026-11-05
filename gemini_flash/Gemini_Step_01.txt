@@ -1,0 +1,55 @@
+STEP ID + TITLE
+01 — Repository audit, private boundaries and work initialization — revision 2
+
+ASSIGNED ROLE
+Gemini Flash implementer. Astra is the appointed architect and has supplied the design. Xbox 360 Rise of the Tomb Raider -> native Linux PC x86-64 / ReXGlue / Vulkan / actual Intel HD 620 / verified SDL bridge. Android deferred. Apply the full anti-cheating and reporting contract in gemini_flash/Gemini_00_Read_First.txt. Implement within this active step; no separate Argon architecture approval.
+
+READ BEFORE WORK
+Read gemini_flash/Gemini_00_Read_First.txt, Gemini_01_Personality_and_Skills.txt, Gemini_02_Architecture_and_Evidence_Gates.txt, Gemini_03_Pinned_SDK_and_Commands.txt and Astra_Evidence_and_Traceability.txt (all under gemini_flash/). Read docs/architecture/01_System_Architecture_ADR.md, 02_Modular_Responsibility_Map.md, 03_Discovery_Plan_and_Gates.md and 04_Worker_Task_Decomposition.md (all under docs/architecture/). Read README.md and docs/research/00_Repository_State.md, 01_Feasibility_Report.md, 02_Risks_Unknowns_and_Gates.md, 03_Sources_and_Evidence.md (all under docs/research/). Inspect actual predecessor proof per dependencies below, not just its PASS label. Steps 10-12 also read gemini_flash/Gemini_90_Ten_Minute_Gameplay_Acceptance.txt.
+
+VERIFIED STARTING STATE / UNKNOWN ASSUMPTIONS
+Astra wrote architecture and prompts only; no program build or gameplay exists at authorship. Historical repo HEAD adf3f12db2d8a1472bd60ce81af424aa92d2c0e6/main and six dirty docs must be rechecked/preserved. Inputs exist; R2 inner identities are reported research evidence to revalidate. HD 620 PCI observed; Vulkan XCB surface query failed. SDK c94f5ebdcb3c9d1a460ca48e04f9758448f8d518 is now selected in ADR-03 but not installed/tested by Astra. Exact future paths in A2 are decisions, not existing files. Actual input/tool/dependency/API/driver/runtime results remain to be obtained. Requirements originate in R0 as amended by user architect delegation, A1 ADR-01..09, A3 experiments and the cited R2-R5 risks. No extra architecture gate remains.
+
+OBJECTIVE AND OUT-OF-SCOPE
+Repository audit, private boundaries and work initialization. Build the selected design incrementally. No substitute release/emulator, DRM bypass, fake frames/progress, success stubs, speculative multi-subsystem rewrite, Android or early publication. SDK-only and synthetic fixtures must be labeled NOT GAME-SPECIFIC ACCEPTANCE.
+
+PRECONDITIONS / STOP CONDITIONS
+Current project and user architect delegation. No separate Argon design prerequisite. Audit may complete with future GPU/input gates blocked.
+Stop only the affected branch on a failed/missing actual prerequisite, unsupported critical behavior or unavailable permission. Continue independent ready tasks from A3. Do not treat unobserved behavior as working or waive final gates.
+
+ALLOWED FILES AND DIRECTORIES
+.gitignore (preserve existing rules; add narrow architecture exclusions) and docs/implementation/ only. Read-only original inputs and existing docs. Do not change README.
+These are selected future locations. Verify destination safety, exact files and ownership before mutation. Preserve unrelated user edits, original inputs and private exclusions; no destructive clean/reset. A routine bounded fix within selected architecture does not require new generic approval.
+
+EXACT WORKER ACTIONS
+Recheck correct root, HEAD, branch, sanitized remotes, instructions and dirty paths. Read the four Astra architecture docs; record ADR-01 through ADR-09 as selected decisions, not technical passes. Preserve the six user edits in E1. Establish .local/, port/generated/, port/rise360_manifest.toml and port/out/ exclusions before any later writer, checking tracked status too. Initialize the exact A3 audit ledger, dependencies/environment/commands/change/blocker records. Inventory tool/host/CPU/RAM/device/controller/capture access and source provenance; record unknowns. Assign each blocker to the dependent experiment. Missing display or TU applicability must not halt independent SDK work.
+Observe one failure -> smallest justified change -> relevant test -> retain result -> next decision. Verify exact SDK source/interfaces before coding; no made-up APIs.
+
+REBUILD / REPRODUCIBILITY COMMANDS
+Use gemini_flash/Gemini_03_Pinned_SDK_and_Commands.txt for source-derived SDK configure/build/test/install and staged init/strict-codegen recipes. Those are future recipes, not proof of execution. Step_01 uses read-only inventory plus exclusion checks; Step_02 derives actual lawful tool invocations and records them. Step_03 validates SDK recipes and saves every exact command/cwd/tool/environment/exit status in docs/implementation/commands.md. Step_04 derives real app presets/targets from actual scaffold and pins package discovery; then Steps_05-12 use that verified app command record. No game build target is assumed to exist before creation. Missing input does not block SDK-only commands; no graphics is required to claim compilation. Record clean-repeat source/config/SDK/patch/input/binary identities. Never execute guessed demo flags or fabricate an unrun command result.
+
+REAL TEST OR PROBE PROCEDURE
+Repeat git rev-parse --show-toplevel, git rev-parse HEAD, git status --short, git remote -v, git branch --show-current, git ls-files, uname -srmo, cat /etc/os-release, cmake --version, ninja --version, lspci -nn and vulkaninfo --summary. Capture EACH exit code separately. Use git check-ignore with the two exact input filenames from E1. Do not assume a failed Vulkan surface query proves GPU incapability.
+Verify ignore coverage with git check-ignore for each selected private family and git ls-files to ensure no restricted tracked files. Record actual baseline hashes and the ready task graph. A failed future GPU probe is a subgate result, not a failed architecture.
+
+PASS / FAIL / BLOCKED CRITERIA
+PASS means correct project, preserved baseline, safe output boundaries and honest dependency ledger; future tests may remain BLOCKED/NOT TESTED. Wrong repository or unsafe destinations block mutation. Missing another architect is not a blocker.
+All PASS evidence needs actual command/observation, exit status where applicable, timestamp/host, exact source and SDK identities and artifact/hash pointers. Code written, compiled SDK, launched window, rendered menu and gameplay remain different outcomes.
+
+EVIDENCE TO SAVE
+docs/implementation/ per A3: exact commands/exit status, source candidate/diff and SDK/patch/dependency identities, changed files/rationale, regression and blocker records, M0-M11 and experiment statuses. Raw logs/input metadata/binaries/captures stay under verified ignored .local/rise360/proof/ or analysis/. Record binary/plugin hashes and selected device where relevant. Use actual screenshot/video/frame/input/clock evidence for visual tests; no public commercial content, secrets or generated game source. Preserve failed attempts too.
+
+FAILURE DIAGNOSIS / ONE-ISSUE-AT-A-TIME RETRY
+Separate unsafe project/output state from future display/input/tool blockers; assign exact dependency scope and continue ready work.
+Do not suppress failing checks or erase failing evidence. Retain first failure, hypothesis, minimal change and retest. Return to owning step for source changes; invalidate affected downstream proofs. If feasibility or authorization fails, stop that branch and report the minimal actionable unblock request.
+
+FINAL STEP REPORT TEMPLATE / HANDOFF TO NEXT STEP
+STEP / DATE / MACHINE / SOURCE COMMIT plus exact candidate diff/snapshot / SDK COMMIT
+STATUS: PASS | FAIL | BLOCKED | NOT TESTED (record subgates separately)
+CHANGED: exact paths and purpose
+COMMANDS: executed commands, exit status, sanitized log pointers
+CHECKS: requirement -> evidence -> result
+REGRESSIONS: yes/no and actual tests
+BLOCKERS: concrete error, affected dependencies, next smallest correction
+NEXT ALLOWED STEP: Step_02 source discovery and Step_03 SDK baseline are ready branches after privacy/audit PASS; run either independently.
+Update docs/implementation/status.md and never equate fixture/build/idle time with real game acceptance.
