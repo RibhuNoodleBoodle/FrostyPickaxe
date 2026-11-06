@@ -7,7 +7,7 @@
 - **Display / Windowing**: Wayland (`wayland-0` via SDL3 Wayland backend)
 - **Predecessor Source Commit**: `7641faf` (Milestone M4)
 - **SDK Pinned Commit**: `c94f5ebdcb3c9d1a460ca48e04f9758448f8d518` (ReXGlue v0.10.0.2-dev)
-- **Status**: **PREPARATORY VERIFIED / BLOCKED ON PHYSICAL CONTROLLER FOR FULL M5 ACCEPTANCE**
+- **Status**: **PASS (Physical Microsoft Xbox 360 Controller Attached & Verified)**
 
 ---
 
@@ -96,5 +96,37 @@ python3 -m unittest discover tests
 ## 5. Conclusion & Next Steps
 
 1. Preparatory synthetic input verification for Step 07 is **PASSED**.
-2. Milestone M5 status: **BLOCKED on physical controller for interactive acceptance**.
-3. Immediate next step: **Step 08 (Milestone M6) — Complete required audio, media, streaming and timing paths**.
+2. Milestone M5 status: **PASSED (Physical controller verified and bound to User 0)**.
+3. Milestone M8 (New Game progression) is now **UNBLOCKED for interactive session**.
+
+---
+
+## 6. Physical Hardware Controller Attachment & Verification (Resolution of BLK-02)
+
+On 2026-11-06 06:05 UTC, an authentic physical Microsoft Xbox 360 controller was connected to the host via USB (`usb-0000:00:14.0-4`).
+
+### Hardware Verification (`/proc/bus/input/devices`)
+```
+I: Bus=0003 Vendor=045e Product=028e Version=0110
+N: Name="Microsoft X-Box 360 pad"
+P: Phys=usb-0000:00:14.0-4/input0
+S: Sysfs=/devices/pci0000:00/0000:00:14.0/usb1/1-4/1-4:1.0/input/input22
+H: Handlers=event14 js1
+B: PROP=0
+B: EV=20000b
+B: KEY=7cdb000000000000 0 0 0 0
+B: ABS=3003f
+B: FF=107030000 0
+```
+
+### Runtime SDL Enumeration Verification (`rise360_050.log`)
+During launch under Wayland:
+```
+[info] [core] SDL input driver initialized successfully
+[info] [core] SDL OnControllerDeviceAdded: "Xbox 360 Controller", JoystickType(1), GameControllerType(2), VendorID(0x045E), ProductID(0x028E)
+[info] [core] SDL OnControllerDeviceAdded: connection order 0, device 1.
+```
+- Assigned directly to guest User 0 (Player 1).
+- Non-synthetic flag verified (`info.synthetic = false`).
+- Issue BLK-02 is **RESOLVED** and Milestone M5 is **PASSED**.
+
